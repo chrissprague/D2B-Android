@@ -1,4 +1,8 @@
 *.class
+gen
+bin
+proguard-project.txt
+project.properties
 
 # Package Files #
 *.jar
