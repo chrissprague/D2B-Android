@@ -1,11 +1,10 @@
-\documentclass{article}
+\documentclass[twoside]{article}
 \title{ProfCom: Individual Presentation Script}
 \author{Christopher Sprague}
 \date{April 2014}
 \begin{document}
-	\maketitle
+\maketitle
 \paragraph{Slide 1: Intro} ~\\
-
 Hello, everyone! My name is Christopher Sprague, and my presentation for 
 you all today will be on the topic of one of my personal projects, an 
 Android app I've named \emph{D2B-Android}. The premise of the app, which I will
@@ -13,13 +12,78 @@ go over in more depth shortly, is primarily to take user input in the
 form of numbers written in standard decimal format, and convert the provided 
 number into its corresponding binary value. As you'll notice, this is an 
 open source project published on my GitHub, which you may access using the 
-link shown. And, for the record, the script I'm reading from \emph{is} written 
-in \TeX{}, and also happens to be available within the aforementioned repo.
+link shown and browse through at your leisure. And, for the record, the script 
+I'm reading from happens to be written in \TeX{}, and is also available to look
+over within the aforementioned repo. If you were curious, I am also creating
+my SRS (Software Requirements Specification) for this app.
 
 \paragraph{Slide 2: Inspiration \& Background} ~\\
+All projects and developments stem from some idea or motivation. For many of
+the projects I have developed recently, I opted to vocalize this inspiration
+for my projects, not just for others to see, but for my own reasons, such as
+when I would look back at the work I had done for these projects, and this
+one is no exception. Obviously, I took on this project to learn a little bit
+more within the realm of mobile development. Furthermore, the Computer Science
+field demands high levels of cooperation and ability to work in group settings;
+I took up this project with two of my friends, Eric Falkenberg and Kamil Bynoe.
+The more technical aspects of my reasons for taking up development included
+further practice with version control using Git and GitHub, as well as working
+out the conversion logic \emph{without} the use of built-in functionality.
+And, obviously, the project has helped put my programming skills into action -
+the conversion logic was originally written in C++ (which also happens to be
+on my GitHub,) Android development is Java heavy, to say the least, and
+I've also begun to scratch the surface with writing in \TeX{}.
+
+\newpage
+\raggedright
+\noindent
 \paragraph{Slide 3: Technical Details} ~\\
+Moving onto some of the more technical details... This is obviously an app
+designed to be used on Android devices. The app was developed using Eclipse's
+Android development environment and tools, which is a free plugin for Eclipse
+you can find through a quick search for "Android Development." The program
+is tested on 4.4 which corresponds to API Level 19, commonly referred to as
+\emph{KitKat}. Some conventions mandate testing on the higher/highest
+available build, while keeping the minimum SDK lower at the same time. In this 
+case my minimum and target SDK is 16, or 4.1.x, \emph{Jelly Bean}. As stated
+earlier, the project uses Git version control through GitHub. The app has not
+been tested on a live device; instead, I do testing using an Android Virtual
+Device (AVD for short) which is available through the Android Dev tools in
+Eclipse.
+
 \paragraph{Slide 4: Technical Details (continued)} ~\\
+Continuing on our technical details discussion... It might be a bit difficult
+to make out, but the material on the bottom left is part of the Android 
+Manifest xml file; the bottom right is actually a block of code from the
+decimal to binary conversion logic written in C++ (a relatively quick
+translation into Java from there,) specifically detailing the routine to
+fetch and format what our new binary number is going to look like. At the top
+right is the p2 function (again, from the C++ program,) which is arguably
+the most important functionality within the conversion logic, which finds
+the next highest power of two which does exceed the remaining value to convert.
+Again, the code is very similar between C++ and Java, but if you're really
+that interested in what it looks like in Java, it is available in the
+\emph{D2B-Android} project on GitHub in the file named \emph{D2BConversionLogic.Java}.
+As I briefly mentioned earlier, while producing this conversion logic
+by myself without the use of any external resources could be considered
+noteworthy or even commendable, someone with a much shorter patience, or
+someone who is simply more focused on producing in more realistic styles
+and shorter timeframes may have chosen to use Java's built-in functionality
+for this base conversion logic, as shown here. Nevertheless, the fact that this
+functionality is readily available can make it easy in the future to add new
+features implementing new conversions, beyond simply base ten to base two
+(that is, \emph{decimal to binary}!)
+
 \paragraph{Slide 5: User Interface} ~\\
+
+
+
 \paragraph{Slide 6: Looking Forward} ~\\
+
+
+
 \paragraph{Slide 7: Questions, Comments, Concerns} ~\\
+
+
+
 \end{document}
