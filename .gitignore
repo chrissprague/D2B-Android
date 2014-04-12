@@ -3,6 +3,11 @@ gen
 bin
 proguard-project.txt
 project.properties
+.classpath
+*.aux
+*.log
+*.pdf
+*.png
 
 # Package Files #
 *.jar
