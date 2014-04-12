@@ -1,9 +1,12 @@
-\documentclass[twoside]{article}
+\documentclass{article}
+\usepackage[margin=1in]{geometry}
 \title{ProfCom: Individual Presentation Script}
 \author{Christopher Sprague}
 \date{April 2014}
+\pagestyle{empty}
 \begin{document}
 \maketitle
+\thispagestyle{empty}
 \paragraph{Slide 1: Intro} ~\\
 
 Hello, everyone! My name is Christopher Sprague, and my presentation for 
@@ -34,8 +37,6 @@ And, obviously, the project has helped put my programming skills into action -
 the conversion logic was originally written in C++ (which also happens to be
 on my GitHub,) Android development is Java heavy, to say the least, and
 I've also begun to scratch the surface with writing in \TeX{}.
-\pagebreak
-\noindent
 \paragraph{Slide 3: Technical Details} ~\\
 
 Moving onto some of the more technical details... This is obviously an app
@@ -50,6 +51,7 @@ earlier, the project uses Git version control through GitHub. The app has not
 been tested on a live device; instead, I do testing using an Android Virtual
 Device (AVD for short) which is available through the Android Dev tools in
 Eclipse.
+\newpage
 \paragraph{Slide 4: Technical Details (continued)} ~\\
 
 Continuing on our technical details discussion... It might be a bit difficult
@@ -72,7 +74,7 @@ and shorter timeframes may have chosen to use Java's built-in functionality
 for this base conversion logic, as shown here. Nevertheless, the fact that this
 functionality is readily available can make it easy in the future to add new
 features implementing new conversions, beyond simply base ten to base two
-(that is, \emph{decimal to binary}!) \newpage
+(that is, \emph{decimal to binary}!)
 \paragraph{Slide 5: User Interface} ~\\
 
 Here are some screenshots of the app in action. The screenshots are from Mac's
