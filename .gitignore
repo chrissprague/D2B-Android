@@ -8,6 +8,7 @@ project.properties
 *.log
 *.pdf
 *.png
+.project
 
 # Package Files #
 *.jar
