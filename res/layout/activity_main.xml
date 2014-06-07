@@ -8,14 +8,24 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     tools:context=".MainActivity" >
-    <EditText android:id="@+id/edit_message"
+    <EditText android:id="@+id/edit_message1"
         android:layout_weight="1"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:hint="@string/edit_message" />
+        android:hint="@string/edit_message_deci" />
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/button_send" 
         android:onClick="sendMessage"/>
+    <EditText android:id="@+id/edit_message2"
+        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:hint="@string/edit_message_binary" />
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/button_send" 
+        android:onClick="sendMessage"/>	
 </LinearLayout>

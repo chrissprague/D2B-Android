@@ -25,14 +25,15 @@ public class MainActivity extends Activity {
 	}
 	
 	public void sendMessage(View view) {
-		Intent intent = new Intent(this, DisplayMessageActivity.class);
-		EditText editText = (EditText) findViewById(R.id.edit_message);
+		Intent intent1 = new Intent(this, DisplayMessageActivity.class);
+		EditText editText = (EditText) findViewById(R.id.edit_message1);
 		String message = editText.getText().toString();
 		if ( message.equals( "" ) ) { // no user input
 			return; // note: do not use == "" ; for comparisons... Java 101...
 		}
-		intent.putExtra(EXTRA_MESSAGE, message);
-		startActivity(intent);
+		intent1.putExtra(EXTRA_MESSAGE, message);
+		startActivity(intent1);
+		return;
 	}
 
 }
