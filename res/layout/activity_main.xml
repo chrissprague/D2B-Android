@@ -18,6 +18,7 @@
         android:layout_height="wrap_content"
         android:text="@string/button_send" 
         android:onClick="sendMessage"/>
+    
     <EditText android:id="@+id/edit_message2"
         android:layout_weight="1"
         android:layout_width="0dp"
@@ -28,4 +29,6 @@
         android:layout_height="wrap_content"
         android:text="@string/button_send" 
         android:onClick="sendMessage"/>	
+        
+        
 </LinearLayout>
