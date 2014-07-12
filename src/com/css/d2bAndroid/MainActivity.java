@@ -1,4 +1,6 @@
-package com.example.myfirstapp;
+package com.css.d2bAndroid;
+
+import com.css.d2bAndroid.R;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -9,7 +11,7 @@ import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
-	public final static String EXTRA_MESSAGE = "com.example.myfirstapp.MESSAGE";
+	public final static String EXTRA_MESSAGE = "com.css.d2bAndroid.MESSAGE";
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {

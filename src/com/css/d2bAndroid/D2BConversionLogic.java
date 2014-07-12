@@ -7,7 +7,7 @@
  * 
  * @author Christopher Sprague
  */
-package com.example.myfirstapp;
+package com.css.d2bAndroid;
 
 public class D2BConversionLogic {
 
