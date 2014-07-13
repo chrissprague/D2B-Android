@@ -8,7 +8,7 @@ import android.support.v4.app.NavUtils;
 import android.view.MenuItem;
 import android.widget.TextView;
 
-public class DisplayMessageActivity extends Activity {
+public class B2DMessageActivity extends Activity {
 
 	@SuppressLint("NewApi")
 	@Override
@@ -26,8 +26,8 @@ public class DisplayMessageActivity extends Activity {
 	    	number = 0 ;
 	    }
 	    
-	    D2BConversionLogic n = new D2BConversionLogic(number);
-	    message = n.dtob();
+	    /** TODO */
+	    message = "0";
 
 	    // Create the text view
 	    TextView textView = new TextView(this);

@@ -24,7 +24,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name="com.css.d2bAndroid.DisplayMessageActivity"
+            android:name="com.css.d2bAndroid.D2BMessageActivity"
             android:label="@string/title_activity_display_message"
             android:parentActivityName="com.css.d2bAndroid.MainActivity" >
             <meta-data

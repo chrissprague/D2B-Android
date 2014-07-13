@@ -27,14 +27,40 @@ public class MainActivity extends Activity {
 	}
 	
 	public void sendMessage(View view) {
-		Intent intent1 = new Intent(this, DisplayMessageActivity.class);
-		EditText editText = (EditText) findViewById(R.id.edit_message1);
-		String message = editText.getText().toString();
-		if ( message.equals( "" ) ) { // no user input
-			return; // note: do not use == "" ; for comparisons... Java 101...
+		Intent intent1 = new Intent(this, D2BMessageActivity.class);
+		EditText editText1 = (EditText) findViewById(R.id.edit_message1);
+		Intent intent2 = new Intent(this, D2BMessageActivity.class);
+		EditText editText2 = (EditText) findViewById(R.id.edit_message2);
+		String message1 = editText1.getText().toString();
+		String message2 = editText2.getText().toString();
+		
+		try {
+			
+			// d2b
+			Integer.parseInt(message1); // input has to be an integer
+			if ( message1.equals( "" ) ) { // no user input
+				return; // note: do not use == "" ; for comparisons... Java 101...
+			} else {
+				intent1.putExtra(EXTRA_MESSAGE, message1);
+				startActivity(intent1);
+			}
+			
+			// b2d
+			Integer.parseInt(message2);
+			if ( message2.equals("" ) ) {
+				return;
+			} else {
+				intent2.putExtra(EXTRA_MESSAGE, message2);
+				//intent2.putExtra(EXTRA_MESSAGE, "b2d");
+				startActivity(intent2);
+			}
+			
+		} catch ( Exception ex )
+		{
+			ex.printStackTrace();
+			return;
 		}
-		intent1.putExtra(EXTRA_MESSAGE, message);
-		startActivity(intent1);
+		
 		return;
 	}
 
