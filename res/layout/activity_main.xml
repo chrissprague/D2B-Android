@@ -2,13 +2,13 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:columnCount="2"
+    android:columnCount="1"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:rowCount="4"
+    android:rowCount="6"
     tools:context=".MainActivity" >
 
     <EditText
@@ -26,28 +26,77 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_column="0"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_row="3"
+        android:layout_gravity="left|top"
+        android:layout_row="2"
         android:ems="10"
-        android:hint="@string/edit_message_binary" />
+        android:hint="@string/edit_message_binary" >
+
+        <requestFocus />
+    </EditText>
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/d_to_b_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_gravity="center_horizontal|bottom"
+        android:layout_column="0"
+        android:layout_gravity="right|top"
+        android:layout_row="2"
+        android:text="@string/b2d" />
+
+    <Button
+        android:id="@+id/b_to_d_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="right|center_vertical"
         android:layout_row="0"
         android:onClick="sendMessage"
         android:text="@string/d2b" />
 
-    <Button
-        android:id="@+id/button1"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_gravity="center_horizontal|top"
-        android:layout_row="3"
-        android:text="@string/b2d" />
+    <EditText
+        android:id="@+id/conversionResults"
+        android:layout_width="match_parent"
+        android:layout_column="0"
+        android:layout_gravity="center_horizontal"
+        android:layout_row="4"
+        android:clickable="false"
+        android:cursorVisible="false"
+        android:ems="10"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
+        android:hint="@string/edit_text_hint"
+        android:inputType="none" />
+
+    <Space
+        android:layout_width="100dp"
+        android:layout_height="1dp"
+        android:layout_column="0"
+        android:layout_row="5" />
+
+    <Space
+        android:layout_width="100dp"
+        android:layout_column="0"
+        android:layout_row="5" />
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="246dp"
+        android:layout_column="0"
+        android:layout_row="5" />
+
+    <Space
+        android:layout_width="100dp"
+        android:layout_column="0"
+        android:layout_row="5" />
+
+    <Space
+        android:layout_width="1dp"
+        android:layout_height="10dp"
+        android:layout_column="0"
+        android:layout_row="3" />
+
+    <Space
+        android:layout_width="100dp"
+        android:layout_row="1" />
 
 </GridLayout>

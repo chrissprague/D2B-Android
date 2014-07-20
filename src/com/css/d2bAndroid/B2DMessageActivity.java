@@ -19,13 +19,6 @@ public class B2DMessageActivity extends Activity {
 	    Intent intent = getIntent();
 	    String message = intent.getStringExtra(MainActivity.EXTRA_MESSAGE);
 	    
-	    int number;
-	    try {
-	    	number = Integer.parseInt(message);
-	    } catch ( NumberFormatException e ) { // in case user input is bad
-	    	number = 0 ;
-	    }
-	    
 	    /** TODO */
 	    message = "0";
 
