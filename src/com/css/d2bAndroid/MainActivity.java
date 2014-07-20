@@ -1,12 +1,10 @@
 package com.css.d2bAndroid;
 
 import android.app.Activity;
+import android.graphics.Color;
 import android.os.Bundle;
-import android.text.Editable;
-import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
@@ -17,11 +15,11 @@ public class MainActivity extends Activity {
 	private EditText edit_message1;
 	private EditText edit_message2;
 	private EditText conversionResults;
-	
+
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_main);		
+		setContentView(R.layout.activity_main);
 		edit_message1 = (EditText)findViewById(R.id.edit_message1);
 		edit_message2 = (EditText)findViewById(R.id.edit_message2);
 		conversionResults = (EditText)findViewById(R.id.conversionResults);
@@ -33,65 +31,69 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
-	public void sendMessage(View view) {
+	public void doDecimalToBinary(View view) {
 		String message1 = edit_message1.getText().toString();
-		String message2 = edit_message2.getText().toString();
-		boolean didDToB = false;
-		final Button d2bButton = (Button) findViewById(R.id.d_to_b_button);
-		d2bButton.setActivated(false);
-		edit_message1.addTextChangedListener(new TextWatcher()
-		{
-
-			@Override
-			public void afterTextChanged(Editable arg0) {
-				d2bButton.setActivated(true);
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence arg0, int arg1,
-					int arg2, int arg3) {
-				// TODO Auto-generated method stub
-				
-			}
-
-			@Override
-			public void onTextChanged(CharSequence arg0, int arg1, int arg2,
-					int arg3) {
-				// TODO Auto-generated method stub
-				
-			}
+		Integer the_number = 0;
 			
-		});
-		try {
-			
-			// d2b
-			Integer.parseInt(message1); // input has to be an integer
-			if ( ! message1.equals( "" ) ) { // no user input
-				return; // note: do not use == "" ; for comparisons... Java 101...
-			} else {
-				d = new D2BConversionLogic(Integer.parseInt(message1));
-				conversionResults.setText(d.dtob());
-				edit_message1.setText("");
-				didDToB = true;
-			}
-			
-			// b2d
-			Integer.parseInt(message2);
-			if ( message2.equals("") || didDToB ) {
+		// d2b
+		if ( ! message1.equals( "" ) ) { // no user input
+			try {
+				conversionResults.setTextColor(Color.BLACK);
+				conversionResults.setTextSize(20);
+				// first, validate that it's valid decimal 0-9, and integer
+				for ( int i = 0 ; i < message1.length() ; i++ )
+				{
+					if ( ! ( Character.isDigit(message1.charAt(i) ) ) ) {
+						conversionResults.setTextColor(Color.RED);
+						conversionResults.setTextSize(14);
+						conversionResults.setText("Decimal number must be an Integer (digits 0-9)");
+						return;
+					}
+				}
+				the_number = Integer.parseInt(message1); // input has to be an integer
+			} catch (NumberFormatException ex )
+			{
+				ex.printStackTrace();
 				return;
-			} else {
-				b = new B2DConversionLogic(Integer.parseInt(message2));
-				conversionResults.setText(b.btod());
-				edit_message2.setText("");
 			}
-			
-		} catch ( Exception ex )
-		{
-			ex.printStackTrace();
-			return;
+			d = new D2BConversionLogic(the_number);
+			conversionResults.setText(d.dtob());
+			edit_message1.setText("");
 		}
 		
 		return;
+	}
+	
+	public void doBinaryToDecimal(View view )
+	{
+		String message2=edit_message2.getText().toString();
+		Integer the_number = 0;
+		
+		// b2d
+		if ( ! message2.equals("") ) {
+			try {
+				conversionResults.setTextColor(Color.BLACK);
+				conversionResults.setTextSize(20);
+				// first, validate that it's only 1's and 0's
+				for ( int i = 0 ; i < message2.length() ; i++ )
+				{
+					if ( ! ( message2.charAt(i) == '1' || message2.charAt(i) == '0' ) ) {
+						conversionResults.setTextColor(Color.RED);
+						conversionResults.setTextSize(14);
+						conversionResults.setText("Binary number must consist of only 1's and 0's");
+						return;
+					}
+				}
+				the_number = Integer.parseInt(message2); // input has to be an integer
+				b = new B2DConversionLogic(the_number);
+				conversionResults.setText(b.btod());
+				edit_message2.setText("");
+			} catch (NumberFormatException ex )
+			{
+				ex.printStackTrace();
+				return;
+			}
+		}
 	}
 
 }

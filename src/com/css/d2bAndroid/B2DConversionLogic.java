@@ -24,11 +24,14 @@ public class B2DConversionLogic {
 		int res_value=0;
 		String res;
 		int c = 0;
-		for ( int i = ( num_in_string_form.length() - 1 ) ; i >=0 ; --i )
+		for ( int i = ( num_in_string_form.length() - 1 ) ; i >=0 ; i-- )
 		{
-			res_value += D2BConversionLogic.power(
-					D2BConversionLogic.power(2,c),
-					Integer.parseInt(Character.toString(num_in_string_form.charAt(i))));
+			if ( Character.toString(num_in_string_form.charAt(i)).equals("1"))
+			{
+				res_value += D2BConversionLogic.power(
+						D2BConversionLogic.power(2,c),
+						Integer.parseInt(Character.toString(num_in_string_form.charAt(i))));
+			}
 			c++;
 		}
 		res = Integer.toString(res_value);
