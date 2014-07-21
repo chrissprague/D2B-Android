@@ -1,14 +1,18 @@
 package com.css.d2bAndroid;
 
 import android.app.Activity;
+import android.content.Context;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.View;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
 public class MainActivity extends Activity {
 
+	private InputMethodManager imm;
 	public final static String EXTRA_MESSAGE = "com.css.d2bAndroid.MESSAGE";
 	private static B2DConversionLogic b;
 	private static D2BConversionLogic d;
@@ -19,6 +23,7 @@ public class MainActivity extends Activity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
+		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_main);
 		edit_message1 = (EditText)findViewById(R.id.edit_message1);
 		edit_message2 = (EditText)findViewById(R.id.edit_message2);
@@ -59,6 +64,8 @@ public class MainActivity extends Activity {
 			d = new D2BConversionLogic(the_number);
 			conversionResults.setText(d.dtob());
 			edit_message1.setText("");
+			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(edit_message1.getWindowToken(), 0);
 		}
 		
 		return;
@@ -88,6 +95,8 @@ public class MainActivity extends Activity {
 				b = new B2DConversionLogic(the_number);
 				conversionResults.setText(b.btod());
 				edit_message2.setText("");
+				imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+				imm.hideSoftInputFromWindow(edit_message2.getWindowToken(), 0);
 			} catch (NumberFormatException ex )
 			{
 				ex.printStackTrace();
