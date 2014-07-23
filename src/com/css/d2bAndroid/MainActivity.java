@@ -10,6 +10,11 @@ import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+import android.support.v4.app.NotificationCompat;
+import android.support.v4.app.NotificationManagerCompat;
+import android.app.Notification;
+import android.app.NotificationManager;
+
 public class MainActivity extends Activity {
 
 	private InputMethodManager imm;
