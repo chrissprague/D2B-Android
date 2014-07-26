@@ -11,6 +11,8 @@ project.properties
 .project
 .settings/*
 
+/libs
+
 # Package Files #
 *.jar
 *.war
