@@ -1,29 +1,35 @@
 package com.css.d2bAndroid;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
+import android.app.PendingIntent;
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
-import android.support.v4.app.NotificationCompat;
-import android.support.v4.app.NotificationManagerCompat;
-import android.app.Notification;
-import android.app.NotificationManager;
-
 public class MainActivity extends Activity {
 
-	private InputMethodManager imm;
-	public final static String EXTRA_MESSAGE = "com.css.d2bAndroid.MESSAGE";
+	private final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+	
+	private static Integer myNotificationID = 001;
 	private static B2DConversionLogic b;
 	private static D2BConversionLogic d;
+	
 	private EditText edit_message1;
 	private EditText edit_message2;
 	private EditText conversionResults;
+	
+	private InputMethodManager imm;
+	private static Notification theNotification;
+	private NotificationManager mNotifyManager;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -33,6 +39,7 @@ public class MainActivity extends Activity {
 		edit_message1 = (EditText)findViewById(R.id.edit_message1);
 		edit_message2 = (EditText)findViewById(R.id.edit_message2);
 		conversionResults = (EditText)findViewById(R.id.conversionResults);
+		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 	}
 
 	@Override
@@ -66,13 +73,34 @@ public class MainActivity extends Activity {
 				ex.printStackTrace();
 				return;
 			}
+			
+			// do conversion
 			d = new D2BConversionLogic(the_number);
-			conversionResults.setText(d.dtob());
+			String result = d.dtob();
+			
+			// show results
+			conversionResults.setText(result);
 			edit_message1.setText("");
+			
+			// hide keyboard
 			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(edit_message1.getWindowToken(), 0);
+			
+			// setup notification			
+			mBuilder.setSmallIcon(R.drawable.d2picon72);
+			mBuilder.setTicker("Decimal to Binary Conversion\n" +
+					"Your result is: "+result);
+			mBuilder.setContentText("Result: "+result);
+			mBuilder.setContentTitle("Decimal to Binary Conversion");
+			mBuilder.setAutoCancel(true);
+			mBuilder.setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0));
+			theNotification = mBuilder.build();
+			theNotification.vibrate = new long[]{0,200}; // set vibrate
+			
+			// do notification
+			mNotifyManager.notify(myNotificationID, theNotification);
 		}
-		
+				
 		return;
 	}
 	
@@ -97,16 +125,39 @@ public class MainActivity extends Activity {
 					}
 				}
 				the_number = Integer.parseInt(message2); // input has to be an integer
-				b = new B2DConversionLogic(the_number);
-				conversionResults.setText(b.btod());
-				edit_message2.setText("");
-				imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-				imm.hideSoftInputFromWindow(edit_message2.getWindowToken(), 0);
 			} catch (NumberFormatException ex )
 			{
 				ex.printStackTrace();
 				return;
 			}
+			
+			// do conversion
+			b = new B2DConversionLogic(the_number);
+			String result = b.btod();
+			
+			// show results
+			conversionResults.setText(result);
+			edit_message2.setText("");
+			
+			// clear the keyboard
+			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+			imm.hideSoftInputFromWindow(edit_message2.getWindowToken(), 0);
+			
+			// setup notification			
+			mBuilder.setSmallIcon(R.drawable.d2picon72);
+			mBuilder.setTicker("Binary to Decimal Conversion\n" +
+					"Your result is: "+result);
+			mBuilder.setContentText("Result: "+result);
+			mBuilder.setContentTitle("Binary to Decimal Conversion");
+			mBuilder.setAutoCancel(true);
+			mBuilder.setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0));
+			theNotification = mBuilder.build();
+			theNotification.vibrate = new long[]{0,200}; // set vibrate
+			
+			// do notification
+			mNotifyManager.notify(myNotificationID, theNotification);
+			
+			return;
 		}
 	}
 
