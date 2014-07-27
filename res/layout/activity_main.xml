@@ -8,7 +8,7 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
-    android:rowCount="6"
+    android:rowCount="8"
     tools:context=".MainActivity" >
 
     <EditText
@@ -17,7 +17,7 @@
         android:layout_column="0"
         android:layout_columnSpan="2"
         android:layout_gravity="center_horizontal"
-        android:layout_row="5"
+        android:layout_row="7"
         android:clickable="false"
         android:cursorVisible="false"
         android:ems="10"
@@ -56,26 +56,6 @@
         android:inputType="number"
         android:textSize="14sp" />
 
-    <Button
-        android:id="@+id/d_to_b_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_gravity="left"
-        android:layout_row="1"
-        android:onClick="doDecimalToBinary"
-        android:text="@string/d2b" />
-
-    <Button
-        android:id="@+id/b_to_d_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="1"
-        android:layout_gravity="left"
-        android:layout_row="4"
-        android:onClick="doBinaryToDecimal"
-        android:text="@string/b2d" />
-
     <EditText
         android:id="@+id/edit_message2"
         android:layout_width="206dp"
@@ -90,5 +70,25 @@
 
         <requestFocus />
     </EditText>
+
+    <Button
+        android:id="@+id/d_to_b_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="1"
+        android:onClick="doDecimalToBinary"
+        android:text="@string/d2b" />
+
+    <Button
+        android:id="@+id/b_to_d_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="4"
+        android:onClick="doBinaryToDecimal"
+        android:text="@string/b2d" />
 
 </GridLayout>
