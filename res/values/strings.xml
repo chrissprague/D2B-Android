@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">D2B-Android</string>
     <string name="action_settings">Settings</string>
     <string name="button_send">Convert</string>
@@ -8,7 +9,16 @@
     <string name="edit_message_deci">Enter a number in decimal&#8230;</string>
     <string name="edit_message_binary">Enter a number in binary&#8230;</string>
     <string name="title_activity_main">MainActivity</string>
-    <string name="title_activity_display_message">Binary</string>
-    <string name="hello_world">Hello world!</string>
     <string name="edit_text_hint">Results will appear here&#8230;</string>
+    <string name="action_about">About</string>
+    <string name="title_activity_about">AboutActivity</string>
+    <string name="about_string1">D2B-Android</string>
+    <string name="about_string2">Designed and developed by Christopher Sprague</string>
+    <string name="about_string3">Special Thanks to</string>
+    <string name="about_string4">Kamil Bynoe and Eric Falkenberg,\n
+	    and Joseph Kozak, for the app\'s artwork</string>
+    <string name="about_button_string">View Project on GitHub</string>
+    <string name="title_activity_about_activity2">AboutActivity2</string>
+    <string name="hello_world">Hello world!</string>
+
 </resources>

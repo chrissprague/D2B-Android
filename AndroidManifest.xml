@@ -3,7 +3,6 @@
     package="com.css.d2bAndroid"
     android:versionCode="1"
     android:versionName="1.0" >
-    
 
     <uses-sdk
         android:minSdkVersion="16"
@@ -15,22 +14,19 @@
         android:label="@string/app_name"
         android:theme="@android:style/Theme.Holo.Light" >
         <activity
-            android:name="com.css.d2bAndroid.MainActivity"
+            android:name=".MainActivity"
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
-
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
-            android:name="com.css.d2bAndroid.D2BMessageActivity"
-            android:label="@string/title_activity_display_message"
-            android:parentActivityName="com.css.d2bAndroid.MainActivity" >
+            android:name=".AboutActivity"
+            android:label="@string/title_activity_about"
+            android:parentActivityName=".MainActivity" ></activity>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.css.d2bAndroid.MainActivity" />
-        </activity>
+                android:value="com.css.d2bandroid.MainActivity"/>
     </application>
-
 </manifest>

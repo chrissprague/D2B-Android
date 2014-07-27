@@ -10,11 +10,18 @@ import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
 import android.view.Menu;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
 
+/**
+ * The primary activity, in which all the conversions are done,
+ * and the majority of user interaction will occur.
+ * 
+ * @author Christopher Sprague
+ */
 public class MainActivity extends Activity {
 
 	private final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
@@ -48,6 +55,10 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * When hitting the D->B button.
+	 * @param view
+	 */
 	public void doDecimalToBinary(View view) {
 		String message1 = edit_message1.getText().toString();
 		Integer the_number = 0;
@@ -104,6 +115,10 @@ public class MainActivity extends Activity {
 		return;
 	}
 	
+	/**
+	 * when hitting the B->D button
+	 * @param view
+	 */
 	public void doBinaryToDecimal(View view )
 	{
 		String message2=edit_message2.getText().toString();
@@ -159,6 +174,12 @@ public class MainActivity extends Activity {
 			
 			return;
 		}
+	}
+	
+	public void doAbout(MenuItem mi)
+	{
+		Intent intent = new Intent(this, AboutActivity.class);
+		startActivity(intent);
 	}
 
 }
