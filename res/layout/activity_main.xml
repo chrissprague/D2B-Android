@@ -1,8 +1,8 @@
 <GridLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:columnCount="1"
+    android:layout_height="wrap_content"
+    android:columnCount="3"
     android:orientation="horizontal"
     android:paddingBottom="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
@@ -11,58 +11,13 @@
     android:rowCount="6"
     tools:context=".MainActivity" >
 
-    <Button
-        android:id="@+id/d_to_b_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="right|bottom"
-        android:layout_row="0"
-        android:onClick="doDecimalToBinary"
-        android:text="@string/d2b" />
-
-    <EditText
-        android:id="@+id/edit_message1"
-        android:layout_width="206dp"
-        android:layout_height="45dp"
-        android:layout_column="0"
-        android:layout_gravity="left|bottom"
-        android:layout_row="0"
-        android:layout_rowSpan="2"
-        android:ems="10"
-        android:hint="@string/edit_message_deci"
-        android:inputType="number"
-        android:textSize="14sp" />
-
-    <EditText
-        android:id="@+id/edit_message2"
-        android:layout_width="205dp"
-        android:layout_height="45dp"
-        android:layout_column="0"
-        android:layout_gravity="left|top"
-        android:layout_row="2"
-        android:ems="10"
-        android:hint="@string/edit_message_binary"
-        android:inputType="number"
-        android:textSize="14sp" >
-    </EditText>
-
-    <Button
-        android:id="@+id/b_to_d_button"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_column="0"
-        android:layout_gravity="right|top"
-        android:layout_row="2"
-        android:onClick="doBinaryToDecimal"
-        android:text="@string/b2d" />
-
     <EditText
         android:id="@+id/conversionResults"
         android:layout_width="match_parent"
         android:layout_column="0"
+        android:layout_columnSpan="2"
         android:layout_gravity="center_horizontal"
-        android:layout_row="4"
+        android:layout_row="5"
         android:clickable="false"
         android:cursorVisible="false"
         android:ems="10"
@@ -70,5 +25,70 @@
         android:focusableInTouchMode="false"
         android:hint="@string/edit_text_hint"
         android:inputType="none" />
-    
+
+    <Space
+        android:layout_width="199dp"
+        android:layout_height="1dp"
+        android:layout_column="0"
+        android:layout_row="1" />
+
+    <Space
+        android:layout_width="51dp"
+        android:layout_height="1dp"
+        android:layout_column="1"
+        android:layout_row="1" />
+
+    <Space
+        android:layout_width="266dp"
+        android:layout_height="15dp"
+        android:layout_column="2"
+        android:layout_row="4" />
+
+    <EditText
+        android:id="@+id/edit_message1"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="1"
+        android:ems="10"
+        android:hint="@string/edit_message_deci"
+        android:inputType="number"
+        android:textSize="14sp" />
+
+    <Button
+        android:id="@+id/d_to_b_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="left"
+        android:layout_row="1"
+        android:onClick="doDecimalToBinary"
+        android:text="@string/d2b" />
+
+    <Button
+        android:id="@+id/b_to_d_button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_column="1"
+        android:layout_gravity="left"
+        android:layout_row="4"
+        android:onClick="doBinaryToDecimal"
+        android:text="@string/b2d" />
+
+    <EditText
+        android:id="@+id/edit_message2"
+        android:layout_width="206dp"
+        android:layout_height="wrap_content"
+        android:layout_column="0"
+        android:layout_gravity="fill_horizontal"
+        android:layout_row="4"
+        android:ems="10"
+        android:hint="@string/edit_message_binary"
+        android:inputType="number"
+        android:textSize="14sp" >
+
+        <requestFocus />
+    </EditText>
+
 </GridLayout>

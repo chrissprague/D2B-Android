@@ -4,16 +4,6 @@
     android:layout_height="match_parent"
     tools:context="${relativePackage}.${activityClass}" >
 
-    <Button
-        android:id="@+id/button2"
-        style="?android:attr/buttonStyleSmall"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerHorizontal="true"
-        android:layout_centerVertical="true"
-        android:onClick="doViewProject"
-        android:text="@string/about_button_string" />
-
     <TextView
         android:id="@+id/textView2"
         android:layout_width="wrap_content"
@@ -22,17 +12,6 @@
         android:layout_centerHorizontal="true"
         android:gravity="center"
         android:text="@string/about_string2" />
-
-    <TextView
-        android:id="@+id/textView3"
-        android:gravity="center"
-        android:textStyle="bold"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/textView2"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="30dp"
-        android:text="@string/about_string3" />
 
     <TextView
         android:id="@+id/textView4"
@@ -44,12 +23,34 @@
         android:text="@string/about_string4" />
 
     <TextView
+        android:id="@+id/textView3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView2"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="14dp"
+        android:gravity="center"
+        android:text="@string/about_string3"
+        android:textStyle="bold" />
+
+    <Button
+        android:id="@+id/button2"
+        style="?android:attr/buttonStyleSmall"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/textView4"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="19dp"
+        android:onClick="doViewProject"
+        android:text="@string/about_button_string" />
+
+    <TextView
         android:id="@+id/textView1"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_alignParentTop="true"
         android:layout_centerHorizontal="true"
-        android:layout_marginTop="60dp"
+        android:layout_marginTop="46dp"
         android:gravity="center"
         android:text="@string/about_string1"
         android:textStyle="bold" />
