@@ -65,6 +65,12 @@ public class MainActivity extends Activity {
 			
 		// d2b
 		if ( ! message1.equals( "" ) ) { // no user input
+			if ( message1.length() > 9 ) {
+				conversionResults.setTextColor(Color.RED);
+				conversionResults.setTextSize(14);
+				conversionResults.setText("Maximum number of digits supported is 9.");
+				return;
+			}
 			try {
 				conversionResults.setTextColor(Color.BLACK);
 				conversionResults.setTextSize(20);
@@ -97,8 +103,8 @@ public class MainActivity extends Activity {
 			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
 			imm.hideSoftInputFromWindow(edit_message1.getWindowToken(), 0);
 			
-			// setup notification			
-			mBuilder.setSmallIcon(R.drawable.d2picon72);
+			// setup notification
+			mBuilder.setSmallIcon(R.drawable.d2b_icon72);
 			mBuilder.setTicker("Decimal to Binary Conversion\n" +
 					"Your result is: "+result);
 			mBuilder.setContentText("Result: "+result);
@@ -121,11 +127,17 @@ public class MainActivity extends Activity {
 	 */
 	public void doBinaryToDecimal(View view )
 	{
-		String message2=edit_message2.getText().toString();
+		String message2 = edit_message2.getText().toString();
 		Integer the_number = 0;
 		
 		// b2d
 		if ( ! message2.equals("") ) {
+			if ( message2.length() > 10 ) {
+				conversionResults.setTextColor(Color.RED);
+				conversionResults.setTextSize(14);
+				conversionResults.setText("Maximum number of digits supported is 9.");
+				return;
+			}
 			try {
 				conversionResults.setTextColor(Color.BLACK);
 				conversionResults.setTextSize(20);
@@ -159,7 +171,7 @@ public class MainActivity extends Activity {
 			imm.hideSoftInputFromWindow(edit_message2.getWindowToken(), 0);
 			
 			// setup notification			
-			mBuilder.setSmallIcon(R.drawable.d2picon72);
+			mBuilder.setSmallIcon(R.drawable.d2b_icon72);
 			mBuilder.setTicker("Binary to Decimal Conversion\n" +
 					"Your result is: "+result);
 			mBuilder.setContentText("Result: "+result);
