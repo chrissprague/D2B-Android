@@ -128,7 +128,6 @@ public class MainActivity extends Activity {
 	public void doBinaryToDecimal(View view )
 	{
 		String message2 = edit_message2.getText().toString();
-		Integer the_number = 0;
 		
 		// b2d
 		if ( ! message2.equals("") ) {
