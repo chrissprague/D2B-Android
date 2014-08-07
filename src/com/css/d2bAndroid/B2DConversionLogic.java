@@ -11,21 +11,22 @@ package com.css.d2bAndroid;
  * @author Christopher Sprague
  */
 public class B2DConversionLogic {
-	private final Integer BINARY_NUMBER;
 	
-	public B2DConversionLogic ( Integer number_to_convert )
+	private final String MESSAGE;
+	
+	public B2DConversionLogic ( String message )
 	{
-		this.BINARY_NUMBER = number_to_convert;
+		this.MESSAGE=message;
 	}
 	
+	// TODO just make this a static method, jeez
 	String btod ()
 	{
-		String num_in_string_form = String.valueOf(BINARY_NUMBER);
 		int res_value=0;
 		String res;
-		for(int i = 0; i < num_in_string_form.length();i++){
-			if (num_in_string_form.charAt(i) == '1'){
-				res_value+= D2BConversionLogic.power(2, num_in_string_form.length() - (i+1));
+		for(int i = 0; i < MESSAGE.length();i++){
+			if (MESSAGE.charAt(i) == '1'){
+				res_value+= D2BConversionLogic.power(2, MESSAGE.length() - (i+1));
 				
 			}
 			

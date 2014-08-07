@@ -132,7 +132,8 @@ public class MainActivity extends Activity {
 		
 		// b2d
 		if ( ! message2.equals("") ) {
-			if ( message2.length() > 10 ) {
+			if ( message2.length() > 15 ) {
+				// TODO remove
 				conversionResults.setTextColor(Color.RED);
 				conversionResults.setTextSize(14);
 				conversionResults.setText("Maximum number of digits supported is 9.");
@@ -151,7 +152,6 @@ public class MainActivity extends Activity {
 						return;
 					}
 				}
-				the_number = Integer.parseInt(message2); // input has to be an integer
 			} catch (NumberFormatException ex )
 			{
 				ex.printStackTrace();
@@ -159,7 +159,7 @@ public class MainActivity extends Activity {
 			}
 			
 			// do conversion
-			b = new B2DConversionLogic(the_number);
+			b = new B2DConversionLogic(message2);
 			String result = b.btod();
 			
 			// show results
