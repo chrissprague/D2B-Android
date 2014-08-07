@@ -23,16 +23,12 @@ public class B2DConversionLogic {
 		String num_in_string_form = String.valueOf(BINARY_NUMBER);
 		int res_value=0;
 		String res;
-		int c = 0;
-		for ( int i = ( num_in_string_form.length() - 1 ) ; i >=0 ; i-- )
-		{
-			if ( Character.toString(num_in_string_form.charAt(i)).equals("1"))
-			{
-				res_value += D2BConversionLogic.power(
-						D2BConversionLogic.power(2,c),
-						Integer.parseInt(Character.toString(num_in_string_form.charAt(i))));
+		for(int i = 0; i < num_in_string_form.length();i++){
+			if (num_in_string_form.charAt(i) == '1'){
+				res_value+= D2BConversionLogic.power(2, num_in_string_form.length() - (i+1));
+				
 			}
-			c++;
+			
 		}
 		res = Integer.toString(res_value);
 		return res;
