@@ -13,12 +13,10 @@
     <string name="action_about">About</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="about_string1">D2B-Android</string>
-    <string name="about_string2">Designed and developed by Christopher Sprague</string>
+    <string name="about_string2">Designed and developed by\nChristopher Sprague and Kamil Bynoe</string>
     <string name="about_string3">Special Thanks to</string>
-    <string name="about_string4">Kamil Bynoe and Eric Falkenberg,\n
-	    and Joseph Kozak, for the app\'s artwork</string>
+    <string name="about_string4">Joseph Kozak, for the app\'s artwork</string>
     <string name="about_button_string">View Project on GitHub</string>
-    <string name="title_activity_about_activity2">AboutActivity2</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="d2b_version_number">D2B-Android Version 1.1</string> <!-- this is arbitrary at the moment -->
 
 </resources>

@@ -6,7 +6,7 @@
 
     <uses-sdk
         android:minSdkVersion="16"
-        android:targetSdkVersion="16" />
+        android:targetSdkVersion="20" />
 
     <application
         android:allowBackup="true"
@@ -24,6 +24,7 @@
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
+    		android:theme="@android:style/Theme.Holo"
             android:parentActivityName=".MainActivity" ></activity>
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
