@@ -1,5 +1,7 @@
 package com.css.d2bAndroid;
 
+import java.util.ArrayList;
+
 import android.app.Activity;
 import android.app.Notification;
 import android.app.NotificationManager;
@@ -14,7 +16,9 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 /**
  * The primary activity, in which all the conversions are done,
@@ -25,6 +29,8 @@ import android.widget.EditText;
 public class MainActivity extends Activity {
 
 	private final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+	private static final ArrayList<String> input_array = new ArrayList<String>();
+	private static final ArrayList<String> output_array = new ArrayList<String>();
 	
 	private static Integer myNotificationID = 001;
 	private static B2DConversionLogic b;
@@ -37,9 +43,20 @@ public class MainActivity extends Activity {
 	private InputMethodManager imm;
 	private static Notification theNotification;
 	private NotificationManager mNotifyManager;
+	
+	private final void populateArrays ( )
+	{
+		input_array.add(getString(R.string.decimal));
+		input_array.add(getString(R.string.binary));
+		output_array.add(getString(R.string.binary));
+		output_array.add(getString(R.string.decimal));
+	}
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
+		
+		populateArrays();
+		
 		super.onCreate(savedInstanceState);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_main);
@@ -47,6 +64,16 @@ public class MainActivity extends Activity {
 		edit_message2 = (EditText)findViewById(R.id.edit_message2);
 		conversionResults = (EditText)findViewById(R.id.conversionResults);
 		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		
+		Spinner inputSpinner = (Spinner)findViewById(R.id.input_type_spinner);
+		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, input_array);  
+	    adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+	    inputSpinner.setAdapter(adapter1);
+	    
+	    Spinner outputSpinner = (Spinner)findViewById(R.id.output_type_spinner);
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, output_array);  
+	    adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
+	    outputSpinner.setAdapter(adapter2);
 	}
 
 	@Override

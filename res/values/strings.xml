@@ -6,6 +6,8 @@
     <string name="button_send">Convert</string>
     <string name="d2b">D -> B</string>
     <string name="b2d">B -> D</string>
+    <string name="decimal">Decimal</string>
+    <string name="binary">Binary</string>
     <string name="edit_message_deci">Enter a number in decimal&#8230;</string>
     <string name="edit_message_binary">Enter a number in binary&#8230;</string>
     <string name="title_activity_main">MainActivity</string>
