@@ -11,6 +11,8 @@ import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.support.v4.app.NotificationCompat;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -60,7 +62,22 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_main);
-		//input_message = (EditText)findViewById(R.id.edit_message1);
+		input_message = (EditText)findViewById(R.id.input_message);
+		input_message.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s) {
+				//System.out.println("yolo");
+				//grab text and do updates/conversions here
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+			
+		});
 		conversionResults = (TextView)findViewById(R.id.conversionResults);
 		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
@@ -79,6 +96,10 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
+	}
+	
+	public void dynamicConversion(View view) {
+		
 	}
 	
 	/**
@@ -210,6 +231,24 @@ public class MainActivity extends Activity {
 	{
 		Intent intent = new Intent(this, AboutActivity.class);
 		startActivity(intent);
+	}
+	
+	/**
+	 * data types
+	 */
+	enum DATA_TYPES {
+		BINARY("Binary"),
+		DECIMAL("Decimal"),
+		;
+		private String type;
+		public String getType()
+		{
+			return this.type;
+		}
+		private DATA_TYPES ( String type )
+		{
+			this.type=type;
+		}
 	}
 
 }
