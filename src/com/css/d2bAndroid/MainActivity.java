@@ -19,6 +19,7 @@ import android.view.inputmethod.InputMethodManager;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
 
 /**
  * The primary activity, in which all the conversions are done,
@@ -36,9 +37,8 @@ public class MainActivity extends Activity {
 	private static B2DConversionLogic b;
 	private static D2BConversionLogic d;
 	
-	private EditText edit_message1;
-	private EditText edit_message2;
-	private EditText conversionResults;
+	private EditText input_message;
+	private TextView conversionResults;
 	
 	private InputMethodManager imm;
 	private static Notification theNotification;
@@ -60,9 +60,8 @@ public class MainActivity extends Activity {
 		super.onCreate(savedInstanceState);
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_main);
-		edit_message1 = (EditText)findViewById(R.id.edit_message1);
-		edit_message2 = (EditText)findViewById(R.id.edit_message2);
-		conversionResults = (EditText)findViewById(R.id.conversionResults);
+		//input_message = (EditText)findViewById(R.id.edit_message1);
+		conversionResults = (TextView)findViewById(R.id.conversionResults);
 		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
 		Spinner inputSpinner = (Spinner)findViewById(R.id.input_type_spinner);
@@ -87,7 +86,7 @@ public class MainActivity extends Activity {
 	 * @param view
 	 */
 	public void doDecimalToBinary(View view) {
-		String message1 = edit_message1.getText().toString();
+		String message1 = input_message.getText().toString();
 		Integer the_number = 0;
 			
 		// d2b
@@ -124,11 +123,11 @@ public class MainActivity extends Activity {
 			
 			// show results
 			conversionResults.setText(result);
-			edit_message1.setText("");
+			input_message.setText("");
 			
 			// hide keyboard
 			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(edit_message1.getWindowToken(), 0);
+			imm.hideSoftInputFromWindow(input_message.getWindowToken(), 0);
 			
 			// setup notification
 			mBuilder.setSmallIcon(R.drawable.d2b_icon48);
@@ -154,7 +153,7 @@ public class MainActivity extends Activity {
 	 */
 	public void doBinaryToDecimal(View view )
 	{
-		String message2 = edit_message2.getText().toString();
+		String message2 = input_message.getText().toString();
 		
 		// b2d
 		if ( ! message2.equals("") ) {
@@ -183,11 +182,11 @@ public class MainActivity extends Activity {
 			
 			// show results
 			conversionResults.setText(result);
-			edit_message2.setText("");
+			input_message.setText("");
 			
 			// clear the keyboard
 			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(edit_message2.getWindowToken(), 0);
+			imm.hideSoftInputFromWindow(input_message.getWindowToken(), 0);
 			
 			// setup notification			
 			mBuilder.setSmallIcon(R.drawable.d2b_icon48);
