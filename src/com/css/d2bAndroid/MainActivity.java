@@ -18,6 +18,8 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
+import android.widget.AdapterView;
+import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
 import android.widget.Spinner;
@@ -31,11 +33,9 @@ import android.widget.TextView;
  */
 public class MainActivity extends Activity {
 
-	private final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
 	private static final ArrayList<String> input_array = new ArrayList<String>();
 	private static final ArrayList<String> output_array = new ArrayList<String>();
 	
-	private static Integer myNotificationID = 001;
 	private static B2DConversionLogic b;
 	private static D2BConversionLogic d;
 	
@@ -45,9 +45,11 @@ public class MainActivity extends Activity {
 	private EditText input_message;
 	private TextView conversion_results;
 	
-	private InputMethodManager imm;
+	private final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+	private static Integer myNotificationID = 001;
 	private static Notification theNotification;
 	private NotificationManager mNotifyManager;
+	private InputMethodManager imm;
 	
 	private final void populateArrays ( )
 	{
@@ -91,11 +93,42 @@ public class MainActivity extends Activity {
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, input_array);  
 	    adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 	    input_spinner.setAdapter(adapter1);
+	    // TODO please make this OnItemSelectedListener a private static final shared among both spinners
+	    // TODO also need to make sure the listener isn't added a bunch of times (I don't think this should happen
+	    // but need to check just in case.)
+	    input_spinner.setOnItemSelectedListener(new OnItemSelectedListener()
+	    {
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				// call out to doConversion again to enact input type changes
+				doConversion();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// do nothing!
+			}
+	    	
+	    });
 	    
 	    output_spinner = (Spinner)findViewById(R.id.output_type_spinner);
 		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, output_array);  
 	    adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 	    output_spinner.setAdapter(adapter2);
+	    output_spinner.setOnItemSelectedListener(new OnItemSelectedListener()
+	    {
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
+				// call out to doConversion again to enact output type changes
+				doConversion();
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0) {
+				// do nothing!
+			}
+	    	
+	    });
 	    	    
 	}
 
@@ -103,135 +136,6 @@ public class MainActivity extends Activity {
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
 		return true;
-	}
-	
-	public void dynamicConversion(View view) {
-		
-	}
-	
-	/**
-	 * When hitting the D->B button.
-	 * @param view
-	 */
-	public void doDecimalToBinary(View view) {
-		String message1 = input_message.getText().toString();
-		Integer the_number = 0;
-			
-		// d2b
-		if ( ! message1.equals( "" ) ) { // no user input
-			if ( message1.length() > 9 ) {
-				conversion_results.setTextColor(Color.RED);
-				conversion_results.setTextSize(14);
-				conversion_results.setText("Maximum number of digits supported is 9.");
-				return;
-			}
-			try {
-				conversion_results.setTextColor(Color.BLACK);
-				conversion_results.setTextSize(20);
-				// first, validate that it's valid decimal 0-9, and integer
-				for ( int i = 0 ; i < message1.length() ; i++ )
-				{
-					if ( ! ( Character.isDigit(message1.charAt(i) ) ) ) {
-						conversion_results.setTextColor(Color.RED);
-						conversion_results.setTextSize(14);
-						conversion_results.setText("Decimal number must be an Integer (digits 0-9)");
-						return;
-					}
-				}
-				the_number = Integer.parseInt(message1); // input has to be an integer
-			} catch (NumberFormatException ex )
-			{
-				ex.printStackTrace();
-				return;
-			}
-			
-			// do conversion
-			d = new D2BConversionLogic(the_number);
-			String result = d.dtob();
-			
-			// show results
-			conversion_results.setText(result);
-			input_message.setText("");
-			
-			// hide keyboard
-			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(input_message.getWindowToken(), 0);
-			
-			// setup notification
-			mBuilder.setSmallIcon(R.drawable.d2b_icon48);
-			mBuilder.setTicker("Decimal to Binary Conversion\n" +
-					"Your result is: "+result);
-			mBuilder.setContentText("Result: "+result);
-			mBuilder.setContentTitle("Decimal to Binary Conversion");
-			mBuilder.setAutoCancel(true);
-			mBuilder.setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0));
-			theNotification = mBuilder.build();
-			theNotification.vibrate = new long[]{0,200}; // set vibrate
-			
-			// do notification
-			mNotifyManager.notify(myNotificationID, theNotification);
-		}
-				
-		return;
-	}
-	
-	/**
-	 * when hitting the B->D button
-	 * @param view
-	 */
-	public void doBinaryToDecimal(View view )
-	{
-		String message2 = input_message.getText().toString();
-		
-		// b2d
-		if ( ! message2.equals("") ) {
-			try {
-				conversion_results.setTextColor(Color.BLACK);
-				conversion_results.setTextSize(20);
-				// first, validate that it's only 1's and 0's
-				for ( int i = 0 ; i < message2.length() ; i++ )
-				{
-					if ( ! ( message2.charAt(i) == '1' || message2.charAt(i) == '0' ) ) {
-						conversion_results.setTextColor(Color.RED);
-						conversion_results.setTextSize(14);
-						conversion_results.setText("Binary number must consist of only 1's and 0's");
-						return;
-					}
-				}
-			} catch (NumberFormatException ex )
-			{
-				ex.printStackTrace();
-				return;
-			}
-			
-			// do conversion
-			b = new B2DConversionLogic(message2);
-			String result = b.btod();
-			
-			// show results
-			conversion_results.setText(result);
-			input_message.setText("");
-			
-			// clear the keyboard
-			imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
-			imm.hideSoftInputFromWindow(input_message.getWindowToken(), 0);
-			
-			// setup notification			
-			mBuilder.setSmallIcon(R.drawable.d2b_icon48);
-			mBuilder.setTicker("Binary to Decimal Conversion\n" +
-					"Your result is: "+result);
-			mBuilder.setContentText("Result: "+result);
-			mBuilder.setContentTitle("Binary to Decimal Conversion");
-			mBuilder.setAutoCancel(true);
-			mBuilder.setContentIntent(PendingIntent.getActivity(getApplicationContext(), 0, new Intent(), 0));
-			theNotification = mBuilder.build();
-			theNotification.vibrate = new long[]{0,200}; // set vibrate
-			
-			// do notification
-			mNotifyManager.notify(myNotificationID, theNotification);
-			
-			return;
-		}
 	}
 	
 	public void doAbout(MenuItem mi)
@@ -355,7 +259,7 @@ public class MainActivity extends Activity {
 					
 					case "Decimal":
 						// decimal -> decimal... what the heck is wrong with you mate?
-						conversion_results.setText(input_spinner.getSelectedItem().toString());
+						conversion_results.setText(input_message.getText().toString());
 						break;
 						
 					default:
