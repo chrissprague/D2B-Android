@@ -236,13 +236,71 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	/**
+	 * Analyzes the user's selection for input/output with the spinners
+	 * and determines which case to follow in all scenarios.<br><br>
+	 * The lines of code that this functionality takes up can certainly be
+	 * cut down, and it will be an issue when we adopt new conversion
+	 * types (read: hex,) but for the time being, this model is fine.
+	 */
 	private void doConversion ( ) 
 	{
 		switch ( input_spinner.getSelectedItem().toString() )
 		{
 			case "Binary":
+				// binary -> * (conceptually we'd have to convert first to decimal before going forward)
+				switch ( output_spinner.getSelectedItem().toString() )
+				{
+					case "Decimal":
+						// b->d
+						String message2 = input_message.getText().toString();
+						if ( ! message2.equals("") ) {
+							if ( message2.length() > 31 ) {
+								conversion_results.setTextColor(Color.RED);
+								conversion_results.setTextSize(14);
+								conversion_results.setText("Maximum number of digits supported is 31.");
+								return;
+							}
+							try {
+								conversion_results.setTextColor(Color.BLACK);
+								conversion_results.setTextSize(20);
+								// first, validate that it's only 1's and 0's
+								for ( int i = 0 ; i < message2.length() ; i++ )
+								{
+									if ( ! ( message2.charAt(i) == '1' || message2.charAt(i) == '0' ) ) {
+										conversion_results.setTextColor(Color.RED);
+										conversion_results.setTextSize(14);
+										conversion_results.setText("Binary number must consist of only 1's and 0's");
+										return;
+									}
+								}
+							} catch (NumberFormatException ex )
+							{
+								ex.printStackTrace();
+								return;
+							}
+							
+							// do conversion
+							b = new B2DConversionLogic(message2);
+							String result = b.btod();
+							
+							// show results
+							conversion_results.setText(result);
+							break;
+						}
+						
+					case "Binary":
+						// Binary -> Binary , what's wrong with you mate?
+						conversion_results.setText(input_message.getText().toString());
+						break;
+						
+					default:
+						System.err.println("Unrecognized conversion type");
+						System.exit(1);
+				}
 				break;
-			default:
+				
+			case "Decimal":
 				// covers decimal conversion: no pre-conversion necessary
 				switch ( output_spinner.getSelectedItem().toString() )
 				{
@@ -289,11 +347,19 @@ public class MainActivity extends Activity {
 						}
 						
 						break;
-						
-					default:
+					
+					case "Decimal":
 						// decimal -> decimal... what the heck is wrong with you mate?
 						conversion_results.setText(input_spinner.getSelectedItem().toString());
+						break;
+						
+					default:
+						System.err.println("Unrecognized conversion type");
+						System.exit(1);
 				}
+			default:
+				System.err.println("Unrecognized conversion type");
+				System.exit(1);
 		}
 	}
 		
