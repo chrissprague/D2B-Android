@@ -51,6 +51,10 @@ public class MainActivity extends Activity {
 	
 	private final void populateArrays ( )
 	{
+		//clear before putting stuff in
+		input_array.removeAll(input_array);
+		output_array.removeAll(output_array);
+		
 		input_array.add(getString(R.string.decimal));
 		input_array.add(getString(R.string.binary));
 		output_array.add(getString(R.string.binary));
