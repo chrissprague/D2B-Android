@@ -39,8 +39,11 @@ public class MainActivity extends Activity {
 	private static B2DConversionLogic b;
 	private static D2BConversionLogic d;
 	
+	private Spinner input_spinner;
+	private Spinner output_spinner;
+	
 	private EditText input_message;
-	private TextView conversionResults;
+	private TextView conversion_results;
 	
 	private InputMethodManager imm;
 	private static Notification theNotification;
@@ -67,8 +70,7 @@ public class MainActivity extends Activity {
 		{
 			@Override
 			public void afterTextChanged(Editable s) {
-				//System.out.println("yolo");
-				//grab text and do updates/conversions here
+				doConversion();
 			}
 
 			@Override
@@ -78,18 +80,19 @@ public class MainActivity extends Activity {
 			public void onTextChanged(CharSequence s, int start, int before, int count) {}
 			
 		});
-		conversionResults = (TextView)findViewById(R.id.conversionResults);
+		conversion_results = (TextView)findViewById(R.id.conversion_results);
 		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
-		Spinner inputSpinner = (Spinner)findViewById(R.id.input_type_spinner);
+		input_spinner = (Spinner)findViewById(R.id.input_type_spinner);
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, input_array);  
 	    adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-	    inputSpinner.setAdapter(adapter1);
+	    input_spinner.setAdapter(adapter1);
 	    
-	    Spinner outputSpinner = (Spinner)findViewById(R.id.output_type_spinner);
+	    output_spinner = (Spinner)findViewById(R.id.output_type_spinner);
 		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, output_array);  
 	    adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
-	    outputSpinner.setAdapter(adapter2);
+	    output_spinner.setAdapter(adapter2);
+	    	    
 	}
 
 	@Override
@@ -113,21 +116,21 @@ public class MainActivity extends Activity {
 		// d2b
 		if ( ! message1.equals( "" ) ) { // no user input
 			if ( message1.length() > 9 ) {
-				conversionResults.setTextColor(Color.RED);
-				conversionResults.setTextSize(14);
-				conversionResults.setText("Maximum number of digits supported is 9.");
+				conversion_results.setTextColor(Color.RED);
+				conversion_results.setTextSize(14);
+				conversion_results.setText("Maximum number of digits supported is 9.");
 				return;
 			}
 			try {
-				conversionResults.setTextColor(Color.BLACK);
-				conversionResults.setTextSize(20);
+				conversion_results.setTextColor(Color.BLACK);
+				conversion_results.setTextSize(20);
 				// first, validate that it's valid decimal 0-9, and integer
 				for ( int i = 0 ; i < message1.length() ; i++ )
 				{
 					if ( ! ( Character.isDigit(message1.charAt(i) ) ) ) {
-						conversionResults.setTextColor(Color.RED);
-						conversionResults.setTextSize(14);
-						conversionResults.setText("Decimal number must be an Integer (digits 0-9)");
+						conversion_results.setTextColor(Color.RED);
+						conversion_results.setTextSize(14);
+						conversion_results.setText("Decimal number must be an Integer (digits 0-9)");
 						return;
 					}
 				}
@@ -143,7 +146,7 @@ public class MainActivity extends Activity {
 			String result = d.dtob();
 			
 			// show results
-			conversionResults.setText(result);
+			conversion_results.setText(result);
 			input_message.setText("");
 			
 			// hide keyboard
@@ -179,15 +182,15 @@ public class MainActivity extends Activity {
 		// b2d
 		if ( ! message2.equals("") ) {
 			try {
-				conversionResults.setTextColor(Color.BLACK);
-				conversionResults.setTextSize(20);
+				conversion_results.setTextColor(Color.BLACK);
+				conversion_results.setTextSize(20);
 				// first, validate that it's only 1's and 0's
 				for ( int i = 0 ; i < message2.length() ; i++ )
 				{
 					if ( ! ( message2.charAt(i) == '1' || message2.charAt(i) == '0' ) ) {
-						conversionResults.setTextColor(Color.RED);
-						conversionResults.setTextSize(14);
-						conversionResults.setText("Binary number must consist of only 1's and 0's");
+						conversion_results.setTextColor(Color.RED);
+						conversion_results.setTextSize(14);
+						conversion_results.setText("Binary number must consist of only 1's and 0's");
 						return;
 					}
 				}
@@ -202,7 +205,7 @@ public class MainActivity extends Activity {
 			String result = b.btod();
 			
 			// show results
-			conversionResults.setText(result);
+			conversion_results.setText(result);
 			input_message.setText("");
 			
 			// clear the keyboard
@@ -233,6 +236,67 @@ public class MainActivity extends Activity {
 		startActivity(intent);
 	}
 	
+	private void doConversion ( ) 
+	{
+		switch ( input_spinner.getSelectedItem().toString() )
+		{
+			case "Binary":
+				break;
+			default:
+				// covers decimal conversion: no pre-conversion necessary
+				switch ( output_spinner.getSelectedItem().toString() )
+				{
+					case "Binary":						
+						// do decimal -> binary
+						String message1 = input_message.getText().toString();
+						Integer the_number = 0;
+						if ( ! message1.equals( "" ) ) { // no user input
+							if ( message1.length() > 9 ) {
+								conversion_results.setTextColor(Color.RED);
+								conversion_results.setTextSize(14);
+								conversion_results.setText("Maximum number of digits supported is 9.");
+								return;
+							}
+							try {
+								conversion_results.setTextColor(Color.BLACK);
+								conversion_results.setTextSize(20);
+								// first, validate that it's valid decimal 0-9, and integer
+								for ( int i = 0 ; i < message1.length() ; i++ )
+								{
+									if ( ! ( Character.isDigit(message1.charAt(i) ) ) ) {
+										conversion_results.setTextColor(Color.RED);
+										conversion_results.setTextSize(14);
+										conversion_results.setText("Decimal number must be an Integer (digits 0-9)");
+										return;
+									}
+								}
+								the_number = Integer.parseInt(message1); // input has to be an integer
+							} catch (NumberFormatException ex )
+							{
+								ex.printStackTrace();
+								return;
+							}
+							
+							// do conversion
+							d = new D2BConversionLogic(the_number);
+							String result = d.dtob();
+							
+							// show results
+							conversion_results.setText(result);
+						} else {
+							// clear conversion results
+							conversion_results.setText("");
+						}
+						
+						break;
+						
+					default:
+						// decimal -> decimal... what the heck is wrong with you mate?
+						conversion_results.setText(input_spinner.getSelectedItem().toString());
+				}
+		}
+	}
+		
 	/**
 	 * data types
 	 */
