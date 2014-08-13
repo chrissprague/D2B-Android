@@ -295,8 +295,9 @@ public class MainActivity extends Activity {
 						break;
 						
 					default:
-						System.err.println("Unrecognized conversion type");
-						System.exit(1);
+						System.err.println("Unrecognized conversion type 298" + output_spinner.getSelectedItem().toString());
+						//System.exit(1);
+						break;
 				}
 				break;
 				
@@ -354,12 +355,15 @@ public class MainActivity extends Activity {
 						break;
 						
 					default:
-						System.err.println("Unrecognized conversion type");
-						System.exit(1);
+						System.err.println("Unrecognized conversion type 357"+output_spinner.getSelectedItem().toString());
+						//System.exit(1);
 				}
+				break;
+				
 			default:
-				System.err.println("Unrecognized conversion type");
-				System.exit(1);
+				System.err.println("Unrecognized conversion type 362 "+input_spinner.getSelectedItem().toString());
+				System.err.println(input_spinner.getSelectedItem().toString().equals("Decimal"));
+				//System.exit(1);
 		}
 	}
 		
