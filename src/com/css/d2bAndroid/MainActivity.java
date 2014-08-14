@@ -194,11 +194,39 @@ public class MainActivity extends Activity {
 							
 							// show results
 							conversion_results.setText(result);
-							break;
 						}
+						break;
 						
 					case "Binary":
 						// Binary -> Binary , what's wrong with you mate?
+						// TODO need to validate binary format (1's + 0's)
+						String the_message = input_message.getText().toString();
+						if ( ! the_message.equals("") ) {
+							if ( the_message.length() > 31 ) {
+								conversion_results.setTextColor(Color.RED);
+								conversion_results.setTextSize(14);
+								conversion_results.setText("Maximum number of digits supported is 31.");
+								return;
+							}
+							try {
+								conversion_results.setTextColor(Color.BLACK);
+								conversion_results.setTextSize(20);
+								// first, validate that it's only 1's and 0's
+								for ( int i = 0 ; i < the_message.length() ; i++ )
+								{
+									if ( ! ( the_message.charAt(i) == '1' || the_message.charAt(i) == '0' ) ) {
+										conversion_results.setTextColor(Color.RED);
+										conversion_results.setTextSize(14);
+										conversion_results.setText("Binary number must consist of only 1's and 0's");
+										return;
+									}
+								}
+							} catch (NumberFormatException ex )
+							{
+								ex.printStackTrace();
+								return;
+							}
+						}
 						conversion_results.setText(input_message.getText().toString());
 						break;
 						
