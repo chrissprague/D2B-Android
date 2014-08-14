@@ -23,29 +23,48 @@
     <LinearLayout
         android:id="@+id/InnerLinearLayout"
         android:layout_width="fill_parent"
-        android:weightSum="2"
+        android:weightSum="8"
         android:layout_height="42dp">
+        
+        <TextView
+            android:id="@+id/inputTypeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:text="@string/input_type_TextView"
+            android:textSize="12sp"
+            android:layout_gravity="center"
+            android:gravity="center"
+            />
 
         <Spinner
             android:id="@+id/input_type_spinner"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:drawSelectorOnTop="true"
-            android:textAlignment="center"
             android:gravity="center|left"
             android:padding="5dip"
             android:paddingLeft="10dip" />
 
+        <TextView
+            android:id="@+id/outputTypeTextView"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:gravity="center"
+            android:layout_weight="1"
+            android:text="@string/output_type_TextView"
+            android:textSize="12sp" />
+
         <Spinner
             android:id="@+id/output_type_spinner"
             android:layout_width="0dp"
-            android:layout_weight="1"
+            android:layout_weight="3"
             android:layout_height="match_parent"
             android:layout_gravity="center"
             android:drawSelectorOnTop="true"
-            android:textAlignment="center"
             android:gravity="center|right"
             android:padding="5dip"
             android:paddingLeft="10dip" />

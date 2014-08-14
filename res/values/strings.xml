@@ -10,6 +10,8 @@
     <string name="title_activity_main">MainActivity</string>
     <string name="edit_text_hint">Results will appear here&#8230;</string>
     <string name="action_about">About</string>
+    <string name="input_type_TextView">Input Type:</string>
+    <string name="output_type_TextView">Output Type:</string>
     <string name="title_activity_about">AboutActivity</string>
     <string name="about_string1">D2B-Android</string>
     <string name="about_string2">Designed and developed by\nChristopher Sprague and Kamil Bynoe</string>
