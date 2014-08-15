@@ -18,16 +18,29 @@
             android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
         <activity
             android:name=".AboutActivity"
             android:label="@string/title_activity_about"
-    		android:theme="@android:style/Theme.Holo"
-            android:parentActivityName=".MainActivity" ></activity>
+            android:parentActivityName=".MainActivity"
+            android:theme="@android:style/Theme.Holo" >
+        </activity>
+
+        <meta-data
+            android:name="android.support.PARENT_ACTIVITY"
+            android:value="com.css.d2bandroid.MainActivity" />
+
+        <activity
+            android:name=".SettingsActivity"
+            android:label="@string/title_activity_settings"
+            android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.css.d2bandroid.MainActivity"/>
+                android:value="com.css.d2bAndroid.MainActivity" />
+        </activity>
     </application>
+
 </manifest>

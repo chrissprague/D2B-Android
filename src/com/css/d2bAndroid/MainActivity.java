@@ -26,7 +26,7 @@ import android.widget.TextView;
 /**
  * The primary activity, in which all the conversions are done,
  * and the majority of user interaction will occur.
- * 
+ *  
  * @author Christopher Sprague
  */
 public class MainActivity extends Activity {
@@ -136,9 +136,25 @@ public class MainActivity extends Activity {
 		return true;
 	}
 	
+	/**
+	 * This won't be called directly in the Java code, but instead, is hooked
+	 * to the About button in the main activity.
+	 * @param m - the menu item, "About".
+	 */
 	public void doAbout(MenuItem mi)
 	{
 		Intent intent = new Intent(this, AboutActivity.class);
+		startActivity(intent);
+	}
+	
+	/**
+	 * This won't be called directly in the Java code, but instead, is hooked
+	 * to the Settings button in the main activity.
+	 * @param m - the menu item, "Settings".
+	 */
+	public void doSettings(MenuItem m)
+	{
+		Intent intent = new Intent(this, SettingsActivity.class);
 		startActivity(intent);
 	}
 	
@@ -197,7 +213,6 @@ public class MainActivity extends Activity {
 						
 					case "Binary":
 						// Binary -> Binary , what's wrong with you mate?
-						// TODO need to validate binary format (1's + 0's)
 						String the_message = input_message.getText().toString();
 						if ( ! the_message.equals("") ) {
 							if ( the_message.length() > 31 ) {
@@ -289,14 +304,13 @@ public class MainActivity extends Activity {
 						break;
 						
 					default:
-						System.err.println("Unrecognized conversion type 357"+output_spinner.getSelectedItem().toString());
+						System.err.println("Unrecognized conversion type: "+output_spinner.getSelectedItem().toString());
 						//System.exit(1);
 				}
 				break;
 				
 			default:
-				System.err.println("Unrecognized conversion type 362 "+input_spinner.getSelectedItem().toString());
-				System.err.println(input_spinner.getSelectedItem().toString().equals("Decimal"));
+				System.err.println("Unrecognized conversion type: "+input_spinner.getSelectedItem().toString());
 				//System.exit(1);
 		}
 	}
