@@ -20,4 +20,9 @@
     <string name="about_button_string">View Project on GitHub</string>
     <string name="d2b_version_number">D2B-Android Version 1.1.3</string> <!-- this is arbitrary at the moment -->
 
+    <string name="title_activity_settings">SettingsActivity</string>
+    <string name="hello_world">Hello world!</string>
+    <string name="checkedtextview">CheckedTextView</string>
+    <string name="button">Button</string>
+
 </resources>
