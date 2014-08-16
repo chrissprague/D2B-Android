@@ -25,7 +25,9 @@ import android.widget.TextView;
 
 /**
  * The primary activity, in which all the conversions are done,
- * and the majority of user interaction will occur.
+ * and the majority of user interaction will occur.<BR><BR>
+ * The About and Settings activities may be accessed from the
+ * Main activity.
  *  
  * @author Christopher Sprague
  */
@@ -33,6 +35,8 @@ public class MainActivity extends Activity {
 
 	private static final ArrayList<String> input_array = new ArrayList<String>();
 	private static final ArrayList<String> output_array = new ArrayList<String>();
+	private final OnItemSelectedListener conversion_listener = getSpinnerOnItemSelectedListener();
+	private final TextWatcher text_watcher = getEditTextTextWatcher();
 	
 	private static B2DConversionLogic b;
 	private static D2BConversionLogic d;
@@ -49,9 +53,17 @@ public class MainActivity extends Activity {
 	private NotificationManager mNotifyManager;
 	private InputMethodManager imm;
 	
+	/**
+	 * populate the array lists for input/output which, in turn,
+	 * populate the adapters which, in turn, populate the
+	 * input and output spinners.<BR><BR>
+	 * This method is called when the main activity is created,
+	 * and successive calls are safe as the arrays will always
+	 * be cleared before any new items are added.
+	 */
 	private final void populateArrays ( )
 	{
-		//clear before putting stuff in
+		// clear before putting stuff in
 		input_array.removeAll(input_array);
 		output_array.removeAll(output_array);
 		
@@ -59,8 +71,12 @@ public class MainActivity extends Activity {
 		input_array.add(getString(R.string.binary));
 		output_array.add(getString(R.string.binary));
 		output_array.add(getString(R.string.decimal));
+		// add more conversion types here
 	}
-
+	
+	/**
+	 * Called when the Main activity is created.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -70,66 +86,28 @@ public class MainActivity extends Activity {
 		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 		setContentView(R.layout.activity_main);
 		input_message = (EditText)findViewById(R.id.input_message);
-		input_message.addTextChangedListener(new TextWatcher()
-		{
-			@Override
-			public void afterTextChanged(Editable s) {
-				doConversion();
-			}
-
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
-
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count) {}
-			
-		});
+		input_message.addTextChangedListener(text_watcher);
 		conversion_results = (TextView)findViewById(R.id.conversion_results);
 		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
 		input_spinner = (Spinner)findViewById(R.id.input_type_spinner);
-		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, input_array);  
+		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, input_array);  
 	    adapter1.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 	    input_spinner.setAdapter(adapter1);
-	    // TODO please make this OnItemSelectedListener a private static final shared among both spinners
-	    // TODO also need to make sure the listener isn't added a bunch of times (I don't think this should happen
-	    // but need to check just in case.)
-	    input_spinner.setOnItemSelectedListener(new OnItemSelectedListener()
-	    {
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				// call out to doConversion again to enact input type changes
-				doConversion();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// do nothing!
-			}
-	    	
-	    });
+	    // this is listener is SET, rather than added, so each spinner will only have a maximum of one OnItemSelectedListener
+	    input_spinner.setOnItemSelectedListener(conversion_listener);
 	    
 	    output_spinner = (Spinner)findViewById(R.id.output_type_spinner);
-		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this,android.R.layout.simple_spinner_item, output_array);  
+		ArrayAdapter<String> adapter2 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, output_array);  
 	    adapter2.setDropDownViewResource(android.R.layout.simple_dropdown_item_1line);
 	    output_spinner.setAdapter(adapter2);
-	    output_spinner.setOnItemSelectedListener(new OnItemSelectedListener()
-	    {
-			@Override
-			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3) {
-				// call out to doConversion again to enact output type changes
-				doConversion();
-			}
-
-			@Override
-			public void onNothingSelected(AdapterView<?> arg0) {
-				// do nothing!
-			}
-	    	
-	    });
-	    	    
+	    // this is listener is SET, rather than added, so each spinner will only have a maximum of one OnItemSelectedListener
+	    output_spinner.setOnItemSelectedListener(conversion_listener);
 	}
-
+	
+	/**
+	 * Inflates the menu for Main activity, including Settings and About.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		getMenuInflater().inflate(R.menu.main, menu);
@@ -137,8 +115,8 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * This won't be called directly in the Java code, but instead, is hooked
-	 * to the About button in the main activity.
+	 * This won't (necessarily) be called directly in the Java code, but instead, is hooked
+	 * to the About button in the main activity. This launches the About activity.
 	 * @param m - the menu item, "About".
 	 */
 	public void doAbout(MenuItem mi)
@@ -148,8 +126,8 @@ public class MainActivity extends Activity {
 	}
 	
 	/**
-	 * This won't be called directly in the Java code, but instead, is hooked
-	 * to the Settings button in the main activity.
+	 * This won't (necessarily) be called directly in the Java code, but instead, is hooked
+	 * to the Settings button in the main activity. This launches the Settings activity.
 	 * @param m - the menu item, "Settings".
 	 */
 	public void doSettings(MenuItem m)
@@ -167,6 +145,7 @@ public class MainActivity extends Activity {
 	 */
 	private void doConversion ( ) 
 	{
+		// TODO allow for strings in !English languages
 		switch ( input_spinner.getSelectedItem().toString() )
 		{
 			case "Binary":
@@ -314,23 +293,55 @@ public class MainActivity extends Activity {
 				//System.exit(1);
 		}
 	}
-		
+	
 	/**
-	 * data types
+	 * Get the OnItemSelectedListener used by both the input spinner
+	 * and the output spinner, which is used to enforce that a conversion
+	 * occurs immediately upon switching data types.
+	 * @return the OnItemSelectedListener used by both the input and output data type spinners.
 	 */
-	enum DATA_TYPES {
-		BINARY("Binary"),
-		DECIMAL("Decimal"),
-		;
-		private String type;
-		public String getType()
+	private final OnItemSelectedListener getSpinnerOnItemSelectedListener()
+	{
+		OnItemSelectedListener conversion_listener = new OnItemSelectedListener()
 		{
-			return this.type;
-		}
-		private DATA_TYPES ( String type )
-		{
-			this.type=type;
-		}
-	}
+			@Override
+			public void onItemSelected(AdapterView<?> arg0, View arg1, int arg2, long arg3)
+			{
+				// do conversion
+				doConversion();
+			}
 
+			@Override
+			public void onNothingSelected(AdapterView<?> arg0)
+			{
+				// do nothing
+			}
+			
+		};
+		return conversion_listener;
+	}
+	
+	/**
+	 * get the text watcher used by the EditText which
+	 * collects the data which the user wants to convert
+	 * @return the TextWatcher used by the primary EditText
+	 */
+	private final TextWatcher getEditTextTextWatcher()
+	{
+		TextWatcher returnme = new TextWatcher()
+		{
+			@Override
+			public void afterTextChanged(Editable s) {
+				doConversion();
+			}
+
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after) {}
+
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count) {}
+			
+		};
+		return returnme;
+	}
 }
