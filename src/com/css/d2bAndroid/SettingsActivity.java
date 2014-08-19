@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import android.app.Activity;
 import android.app.Fragment;
 import android.os.Bundle;
+import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -16,9 +17,12 @@ import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.ListPopupWindow;
+import android.widget.ListView;
 import android.widget.TextView;
 
 public class SettingsActivity extends Activity implements OnItemClickListener {
+	
+	SimpleCursorAdapter mAdapter;
 	
 	private static final ArrayList<String> settings = populateSettings();
 	private ArrayAdapter<String> l;
@@ -36,6 +40,7 @@ public class SettingsActivity extends Activity implements OnItemClickListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
+		
 		TextView t = (TextView)findViewById(R.id.textView1);
 		// Inflate the menu; this adds items to the action bar if it is present.
 		l= new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, populateSettings());
@@ -45,7 +50,7 @@ public class SettingsActivity extends Activity implements OnItemClickListener {
 		lpw.setWidth(400);
 		lpw.setModal(true);
 		lpw.setOnItemClickListener(this);
-		lpw.setAnchorView((TextView)findViewById(R.id.textView1));
+		//lpw.setAnchorView((TextView)findViewById(R.id.textView1));
 		t.setOnClickListener(new OnClickListener() {
 
 			@Override
@@ -76,9 +81,6 @@ public class SettingsActivity extends Activity implements OnItemClickListener {
 		// automatically handle clicks on the Home/Up button, so long
 		// as you specify a parent activity in AndroidManifest.xml.
 		int id = item.getItemId();
-		if (id == R.id.action_settings) {
-			return true;
-		}
 		return super.onOptionsItemSelected(item);
 	}
 
