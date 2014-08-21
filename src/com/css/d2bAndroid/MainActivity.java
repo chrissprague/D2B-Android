@@ -224,7 +224,7 @@ public class MainActivity extends Activity {
 						
 					default:
 						System.err.println("Unrecognized conversion type 298" + output_spinner.getSelectedItem().toString());
-						//System.exit(1);
+						System.exit(1);
 						break;
 				}
 				break;
@@ -284,13 +284,15 @@ public class MainActivity extends Activity {
 						
 					default:
 						System.err.println("Unrecognized conversion type: "+output_spinner.getSelectedItem().toString());
-						//System.exit(1);
+						System.exit(1);
+						break;
 				}
 				break;
 				
 			default:
 				System.err.println("Unrecognized conversion type: "+input_spinner.getSelectedItem().toString());
-				//System.exit(1);
+				System.exit(1);
+				break;
 		}
 	}
 	
