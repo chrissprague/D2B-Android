@@ -145,6 +145,11 @@ public class MainActivity extends Activity {
 	 */
 	private void doConversion ( ) 
 	{
+		// will be converted to red if an error comes up.
+		// this addresses the issue in which you go erroneous input in D->B and then
+		// switch the input type to binary (and possibly other combinations.)
+		conversion_results.setTextColor(Color.BLACK);
+		conversion_results.setTextSize(20);
 		// TODO allow for strings in !English languages
 		switch ( input_spinner.getSelectedItem().toString() )
 		{
@@ -241,7 +246,7 @@ public class MainActivity extends Activity {
 							if ( message1.length() > 9 ) {
 								conversion_results.setTextColor(Color.RED);
 								conversion_results.setTextSize(14);
-								conversion_results.setText("Maximum number of digits supported is 9.");
+								conversion_results.setText("Maximum number of digits supported is 18.");
 								return;
 							}
 							try {
@@ -257,7 +262,17 @@ public class MainActivity extends Activity {
 										return;
 									}
 								}
-								the_number = Integer.parseInt(message1); // input has to be an integer
+								if ( message1.length() > 9 ) 
+								{
+									// need float
+									Float num = Float.parseFloat(message1);
+									System.out.println(Float.toString(num));
+									String result = D2BConversionLogic.dtob_float(num);
+									conversion_results.setText(result);
+									return;
+								} else {
+									the_number = Integer.parseInt(message1); // input has to be an integer
+								}
 							} catch (NumberFormatException ex )
 							{
 								ex.printStackTrace();

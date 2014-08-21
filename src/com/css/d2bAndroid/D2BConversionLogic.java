@@ -9,6 +9,8 @@
  */
 package com.css.d2bAndroid;
 
+import java.util.ArrayList;
+
 /**
  * D2BConversionLogic class.
  * <br><br>
@@ -84,6 +86,27 @@ public class D2BConversionLogic {
 	}
 	
 	/**
+	 * p2 function catered to float values.<BR><BR>
+	 * <I>Seems to be currently broken.</I>
+	 * @param value_remaining
+	 * @return something
+	 */
+	@Deprecated
+	static int p2_float ( float value_remaining ) {
+		if ( value_remaining == 0 ) {
+			return 0; // base case
+		}
+		int pow = 0;
+		for ( int i = 0 ; Math.pow(2, i) < value_remaining ; i++ ) {
+			pow++;
+		}
+		if ( power(2,pow) > value_remaining ) {
+			return ( pow - 1 ) ;
+		}
+		return pow;
+	}
+	
+	/**
 	 * Run a sequence similar to dtob.cpp's main
 	 * without working with stdin/stdout.
 	 * 
@@ -105,7 +128,8 @@ public class D2BConversionLogic {
 		}
 		int R = num - power(2,p2(num)); // R = value remaining
 		bin[p2(num)] = 1;
-		while ( R != 0 ) {
+		while ( R != 0 )
+		{
 			int nhp = p2(R); // next highest power
 			bin[nhp] = 1;
 			R = R - power(2, p2(R));
@@ -118,6 +142,39 @@ public class D2BConversionLogic {
 			strRep += bin[i];
 		}
 		return strRep;
+	}
+	
+	/**
+	 * <i>Currently broken. Don't use this guy just yet.</i>
+	 * @param float_value - the float value to convert to string (decimal)
+	 * @return the string representation of the float value, converted to binary.
+	 */
+	@Deprecated
+	static String dtob_float (float float_value) {
+		int size = p2_float(float_value)+1; // the length of the string.
+		System.out.println(size);
+		ArrayList<Float> bin = new ArrayList<Float>(size);
+		for ( int i = 0 ; i < size ; ++i )
+			bin.add(Float.valueOf(0)); // "Initialize" array
+		
+		for ( int i = 0 ; i < size ; i ++ ) {
+			bin.set(i, Float.valueOf(0)); // set default to 0, put in 1's later
+		}
+		float R = (float) (float_value - Math.pow(2, p2_float(float_value)));
+		bin.set(p2_float(float_value), Float.valueOf(1));
+		while ( R != 0 )
+		{
+			int nhp = p2_float(R);
+			bin.set(nhp, Float.valueOf(1));
+			R=(float) (R-Math.pow(2, p2_float(R)));
+		}
+		String str = new String();
+		
+		// print out the array backwards
+		for ( int i = (size-1) ; i >= 0 ; i-- ) {
+			str += bin.get(i).toString().replaceAll("\\.?0*$", "");
+		}
+		return str;
 	}
 	
 }
