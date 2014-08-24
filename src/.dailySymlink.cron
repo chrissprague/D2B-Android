@@ -1,1 +1,1 @@
-30 * * * * cd ~/public_html/Resources/Android/; ./.symlinkLatestVersion.sh
+30 0 * * * cd ~/public_html/Resources/Android/; ./.symlinkLatestVersion.sh
