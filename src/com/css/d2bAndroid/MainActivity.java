@@ -243,7 +243,7 @@ public class MainActivity extends Activity {
 						String message1 = input_message.getText().toString();
 						Integer the_number = 0;
 						if ( ! message1.equals( "" ) ) { // no user input
-							if ( message1.length() > 9 ) {
+							if ( message1.length() > 18 ) {
 								conversion_results.setTextColor(Color.RED);
 								conversion_results.setTextSize(14);
 								conversion_results.setText("Maximum number of digits supported is 18.");
@@ -293,7 +293,7 @@ public class MainActivity extends Activity {
 						break;
 					
 					case "Decimal":
-						// decimal -> decimal... what the heck is wrong with you mate?
+						// decimal -> decimal; just echo the input
 						conversion_results.setText(input_message.getText().toString());
 						break;
 						

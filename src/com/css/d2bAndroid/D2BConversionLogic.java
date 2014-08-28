@@ -34,15 +34,19 @@ public class D2BConversionLogic {
 	}
 	
 	/**
-	* power function
+	* power function<BR><BR>
 	* given an integer base and integer exponent,
-	* return the value of (base)^(exponent)
-	* note that 0^0 is defined here as 1.
+	* return the value of (base)^(exponent)<BR><BR>
+	* note that 0^0 is defined here as 1.<BR><BR>
+	* Use {@link java.lang.Math#pow Math.pow}  instead of this
+	* 
+	* @see java.lang.Math#pow
 	* 
 	* @param base - the base
 	* @param exponent - the power to raise the base to
 	* @return the value of ( base ^ exponent )
 	*/
+	@Deprecated
 	static int power ( int base, int exponent ) {
 		if ( base == 0 && exponent == 0 ) {
 			return 1; // definition here (redundant but w/e)
@@ -86,21 +90,19 @@ public class D2BConversionLogic {
 	}
 	
 	/**
-	 * p2 function catered to float values.<BR><BR>
-	 * <I>Seems to be currently broken.</I>
+	 * p2 function catered to float values.
 	 * @param value_remaining
 	 * @return something
 	 */
-	@Deprecated
 	static int p2_float ( float value_remaining ) {
-		if ( value_remaining == 0 ) {
+		if ( value_remaining == Float.valueOf(0) ) {
 			return 0; // base case
 		}
 		int pow = 0;
 		for ( int i = 0 ; Math.pow(2, i) < value_remaining ; i++ ) {
 			pow++;
 		}
-		if ( power(2,pow) > value_remaining ) {
+		if ( Math.pow(2,pow) > value_remaining ) {
 			return ( pow - 1 ) ;
 		}
 		return pow;
@@ -145,15 +147,15 @@ public class D2BConversionLogic {
 	}
 	
 	/**
-	 * <i>Currently broken. Don't use this guy just yet.</i>
+	 * Do decimal to binary conversion of numbers that would otherwise overflow
+	 * java's primitive <code>int</code>.
 	 * @param float_value - the float value to convert to string (decimal)
 	 * @return the string representation of the float value, converted to binary.
 	 */
-	@Deprecated
 	static String dtob_float (float float_value) {
 		int size = p2_float(float_value)+1; // the length of the string.
 		System.out.println(size);
-		ArrayList<Float> bin = new ArrayList<Float>(size);
+		ArrayList<Float> bin = new ArrayList<Float>(50);
 		for ( int i = 0 ; i < size ; ++i )
 			bin.add(Float.valueOf(0)); // "Initialize" array
 		
