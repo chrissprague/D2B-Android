@@ -3,18 +3,14 @@ package com.css.d2bAndroid;
 import java.util.ArrayList;
 
 import android.app.Activity;
-import android.app.Notification;
-import android.app.NotificationManager;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
-import android.support.v4.app.NotificationCompat;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.ArrayAdapter;
@@ -46,11 +42,7 @@ public class MainActivity extends Activity {
 	private EditText input_message;
 	private TextView conversion_results;
 	
-	private final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
-	private static Integer myNotificationID = 001;
-	private static Notification theNotification;
-	private NotificationManager mNotifyManager;
-	private InputMethodManager imm;
+
 	
 	/**
 	 * populate the array lists for input/output which, in turn,
@@ -84,7 +76,6 @@ public class MainActivity extends Activity {
 		input_message = (EditText)findViewById(R.id.input_message);
 		input_message.addTextChangedListener(text_watcher);
 		conversion_results = (TextView)findViewById(R.id.conversion_results);
-		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
 		
 		input_spinner = (Spinner)findViewById(R.id.input_type_spinner);
 		ArrayAdapter<String> adapter1 = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, input_array);  

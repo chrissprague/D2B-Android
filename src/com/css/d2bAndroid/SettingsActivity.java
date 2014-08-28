@@ -4,7 +4,10 @@ import java.util.ArrayList;
 
 import android.app.Activity;
 import android.app.Fragment;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.os.Bundle;
+import android.support.v4.app.NotificationCompat;
 import android.support.v4.widget.SimpleCursorAdapter;
 import android.view.LayoutInflater;
 import android.view.Menu;
@@ -12,21 +15,25 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.View.OnClickListener;
 import android.view.ViewGroup;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemClickListener;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.ListPopupWindow;
-import android.widget.ListView;
 import android.widget.TextView;
 
 public class SettingsActivity extends Activity implements OnItemClickListener {
 	
 	SimpleCursorAdapter mAdapter;
 	
-	private static final ArrayList<String> settings = populateSettings();
 	private ArrayAdapter<String> l;
 	private ListPopupWindow lpw;
+	
+	private final NotificationCompat.Builder mBuilder = new NotificationCompat.Builder(this);
+	private static Integer myNotificationID = 001;
+	private static Notification theNotification;
+	private NotificationManager mNotifyManager;
+	private InputMethodManager imm;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -40,7 +47,8 @@ public class SettingsActivity extends Activity implements OnItemClickListener {
 
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
-		
+		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+
 		TextView t = (TextView)findViewById(R.id.textView1);
 		// Inflate the menu; this adds items to the action bar if it is present.
 		l= new ArrayAdapter<String>(this, android.R.layout.simple_dropdown_item_1line, populateSettings());
