@@ -8,6 +8,8 @@
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
+    android:focusable="true"
+    android:focusableInTouchMode="true"
     tools:context=".MainActivity" >
 
     <EditText
@@ -19,7 +21,8 @@
         android:ems="10"
         android:hint="@string/input_message"
         android:inputType="number"
-        android:textSize="14sp" />
+        android:textSize="14sp"
+        />
 
     <LinearLayout
         android:id="@+id/InnerLinearLayout"

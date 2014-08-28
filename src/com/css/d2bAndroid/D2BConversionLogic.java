@@ -154,7 +154,6 @@ public class D2BConversionLogic {
 	 */
 	static String dtob_float (float float_value) {
 		int size = p2_float(float_value)+1; // the length of the string.
-		System.out.println(size);
 		ArrayList<Float> bin = new ArrayList<Float>(50);
 		for ( int i = 0 ; i < size ; ++i )
 			bin.add(Float.valueOf(0)); // "Initialize" array

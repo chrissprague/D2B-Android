@@ -14,7 +14,6 @@ import android.text.TextWatcher;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
@@ -78,12 +77,9 @@ public class MainActivity extends Activity {
 	 * Called when the Main activity is created.
 	 */
 	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
-		populateArrays();
-		
+	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
-		getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
+		populateArrays();
 		setContentView(R.layout.activity_main);
 		input_message = (EditText)findViewById(R.id.input_message);
 		input_message.addTextChangedListener(text_watcher);
@@ -103,6 +99,9 @@ public class MainActivity extends Activity {
 	    output_spinner.setAdapter(adapter2);
 	    // this is listener is SET, rather than added, so each spinner will only have a maximum of one OnItemSelectedListener
 	    output_spinner.setOnItemSelectedListener(conversion_listener);
+	    
+	    // input text view must request focus so the keyboard is "targeting" the right thing
+	    input_message.requestFocus();
 	}
 	
 	/**
@@ -196,7 +195,7 @@ public class MainActivity extends Activity {
 						break;
 						
 					case "Binary":
-						// Binary -> Binary , what's wrong with you mate?
+						// Binary -> Binary ; just echo input text
 						String the_message = input_message.getText().toString();
 						if ( ! the_message.equals("") ) {
 							if ( the_message.length() > 31 ) {
@@ -265,12 +264,13 @@ public class MainActivity extends Activity {
 								if ( message1.length() > 9 ) 
 								{
 									// need float
+									conversion_results.setTextSize(14);
 									Float num = Float.parseFloat(message1);
-									System.out.println(Float.toString(num));
 									String result = D2BConversionLogic.dtob_float(num);
 									conversion_results.setText(result);
 									return;
 								} else {
+									conversion_results.setTextSize(20);
 									the_number = Integer.parseInt(message1); // input has to be an integer
 								}
 							} catch (NumberFormatException ex )
