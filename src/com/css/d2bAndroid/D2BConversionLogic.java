@@ -34,37 +34,6 @@ public class D2BConversionLogic {
 	}
 	
 	/**
-	* power function<BR><BR>
-	* given an integer base and integer exponent,
-	* return the value of (base)^(exponent)<BR><BR>
-	* note that 0^0 is defined here as 1.<BR><BR>
-	* Use {@link java.lang.Math#pow Math.pow}  instead of this
-	* 
-	* @see java.lang.Math#pow
-	* 
-	* @param base - the base
-	* @param exponent - the power to raise the base to
-	* @return the value of ( base ^ exponent )
-	*/
-	@Deprecated
-	static int power ( int base, int exponent ) {
-		if ( base == 0 && exponent == 0 ) {
-			return 1; // definition here (redundant but w/e)
-		}
-		if ( exponent == 0 ) {
-			return 1;
-		}
-		if ( exponent == 1 ) {
-			return base;
-		}
-		int sum = base;
-		for ( int i = 1 ; i < exponent ; i++ ) {
-			sum = sum * base;
-		}
-		return sum;
-	}
-	
-	/**
 	 * given an integer value_remaining (think remainder)
 	 * return the highest POWER to which 2 can be raised
 	 * that does not EXCEED the value of value_remaining.
@@ -80,10 +49,10 @@ public class D2BConversionLogic {
 			return 0; // base case
 		}
 		int pow = 0;
-		for ( int i = 0 ; power(2,i) < value_remaining ; i++ ) {
+		for ( int i = 0 ; Math.pow(2,i) < value_remaining ; i++ ) {
 			pow++;
 		}
-		if ( power(2,pow) > value_remaining ) {
+		if ( Math.pow(2,pow) > value_remaining ) {
 			return ( pow - 1 ) ;
 		}
 		return pow;
@@ -128,13 +97,13 @@ public class D2BConversionLogic {
 		for ( int i = 0 ; i < size ; i ++ ) {
 			bin[i] = 0 ; // set default to 0, put in 1's later
 		}
-		int R = num - power(2,p2(num)); // R = value remaining
+		int R = (int) (num - Math.pow(2,p2(num))); // R = value remaining
 		bin[p2(num)] = 1;
 		while ( R != 0 )
 		{
 			int nhp = p2(R); // next highest power
 			bin[nhp] = 1;
-			R = R - power(2, p2(R));
+			R = (int) (R - Math.pow(2, p2(R)));
 		}
 		
 		String strRep = new String();

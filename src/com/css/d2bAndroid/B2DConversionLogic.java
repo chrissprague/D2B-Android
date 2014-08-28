@@ -26,8 +26,7 @@ public class B2DConversionLogic {
 		String res;
 		for(int i = 0; i < MESSAGE.length();i++){
 			if (MESSAGE.charAt(i) == '1'){
-				res_value+= D2BConversionLogic.power(2, MESSAGE.length() - (i+1));
-				
+				res_value+= Math.pow(2, MESSAGE.length() - (i+1));
 			}
 			
 		}
