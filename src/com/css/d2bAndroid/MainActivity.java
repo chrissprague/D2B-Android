@@ -3,7 +3,12 @@ package com.css.d2bAndroid;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,7 +32,9 @@ import android.widget.TextView;
  * @author Christopher Sprague
  */
 public class MainActivity extends Activity {
-
+	
+	private SharedPreferences sp;
+	
 	private static final ArrayList<String> input_array = new ArrayList<String>();
 	private static final ArrayList<String> output_array = new ArrayList<String>();
 	private final OnItemSelectedListener conversion_listener = getSpinnerOnItemSelectedListener();
@@ -71,6 +78,37 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		populateArrays();
+		
+		sp  = this.getSharedPreferences(
+				getString(R.string.preference_file), Context.MODE_PRIVATE);
+	 
+		PackageInfo pkgInfo;
+		int the_theme = 0;
+		try {
+			pkgInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+			the_theme = pkgInfo.applicationInfo.theme;
+		} catch (NameNotFoundException e1) {
+			e1.printStackTrace();
+			System.exit(4);
+		}
+		
+		// check sp here for theme
+		if ( sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true) )
+		{
+			if ( ! ( android.R.style.Theme_Holo_Light == the_theme ) )
+			{
+				this.setTheme(android.R.style.Theme_Holo_Light);
+				// light
+			}
+		}
+		else
+		{
+			if ( ! ( android.R.style.Theme_Holo == the_theme ) )
+			{
+				this.setTheme(android.R.style.Theme_Holo);
+				// dark
+			}
+		}
 		setContentView(R.layout.activity_main);
 		input_message = (EditText)findViewById(R.id.input_message);
 		input_message.addTextChangedListener(text_watcher);
@@ -216,7 +254,7 @@ public class MainActivity extends Activity {
 						break;
 						
 					default:
-						System.err.println("Unrecognized conversion type 298" + output_spinner.getSelectedItem().toString());
+						System.err.println("Unrecognized conversion type: " + output_spinner.getSelectedItem().toString());
 						System.exit(1);
 						break;
 				}
