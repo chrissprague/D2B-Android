@@ -87,6 +87,8 @@ public class D2BConversionLogic {
 	 * and integer representing the binary form of
 	 * the number you gave.
 	 * 
+	 * TODO Make static
+	 * 
 	 * @param number - number to turn into binary
 	 * @return binary representation of that number
 	 */

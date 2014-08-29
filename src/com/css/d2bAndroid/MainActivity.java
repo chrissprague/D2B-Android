@@ -33,7 +33,6 @@ public class MainActivity extends Activity {
 	private final OnItemSelectedListener conversion_listener = getSpinnerOnItemSelectedListener();
 	private final TextWatcher text_watcher = getEditTextTextWatcher();
 	
-	private static B2DConversionLogic b;
 	private static D2BConversionLogic d;
 	
 	private Spinner input_spinner;
@@ -177,8 +176,7 @@ public class MainActivity extends Activity {
 							}
 							
 							// do conversion
-							b = new B2DConversionLogic(message2);
-							String result = b.btod();
+							String result = B2DConversionLogic.btod(message2);
 							
 							// show results
 							conversion_results.setText(result);
