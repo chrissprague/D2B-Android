@@ -17,14 +17,12 @@ import android.view.View;
 public class AboutActivity extends Activity {
 	
 	private SharedPreferences sp;
-	private SharedPreferences.Editor spe;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
 		sp  = this.getSharedPreferences(
 				getString(R.string.preference_file), Context.MODE_PRIVATE);
-		spe = sp.edit();
 		
 		// check sp here for theme
 		if ( sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true) )

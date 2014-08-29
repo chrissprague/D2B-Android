@@ -74,7 +74,18 @@ public class SettingsActivity extends Activity {
 	 */
 	public void onDefaultsClick(View view)
 	{
-		
+		// TODO revert all settings to defaults in here.
+	}
+	
+	public void onSaveClick(View view)
+	{
+		spe.commit();
+		this.recreate();
+	}
+	
+	public void onCancelClick(View view)
+	{
+		// TODO discard changes?
 	}
 	
 	/**
@@ -91,8 +102,5 @@ public class SettingsActivity extends Activity {
 		{
 			this.setTheme(android.R.style.Theme_Holo); 
 		}
-		this.recreate();
-		// TODO no commit until save
-		spe.commit();
 	}
 }

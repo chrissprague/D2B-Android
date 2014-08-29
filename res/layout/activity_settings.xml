@@ -35,7 +35,8 @@
             android:layout_height="wrap_content"
             android:layout_gravity="left"
             android:layout_weight="1"
-            android:text="@string/save" />
+            android:text="@string/save"
+            android:onClick="onSaveClick" />
 
         <Button
             style="?android:attr/buttonBarButtonStyle"
@@ -43,7 +44,8 @@
             android:layout_width="0dp"
             android:layout_weight="1"
             android:layout_height="wrap_content"
-            android:text="@string/cancel" />
+            android:text="@string/cancel"
+            android:onClick="onCancelClick" />
 
         <Button
             style="?android:attr/buttonBarButtonStyle"
@@ -51,7 +53,8 @@
             android:layout_weight="1"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:text="@string/defaults" />
+            android:text="@string/defaults"
+            android:onClick="onDefaultsClick" />
 
     </LinearLayout>
     
