@@ -59,12 +59,12 @@ public class D2BConversionLogic {
 	}
 	
 	/**
-	 * p2 function catered to float values.
+	 * p2 function catered to long values.
 	 * @param value_remaining
 	 * @return something
 	 */
-	static int p2_float ( float value_remaining ) {
-		if ( value_remaining == Float.valueOf(0) ) {
+	static int p2_long ( long value_remaining ) {
+		if ( value_remaining == Long.valueOf(0) ) {
 			return 0; // base case
 		}
 		int pow = 0;
@@ -120,31 +120,31 @@ public class D2BConversionLogic {
 	/**
 	 * Do decimal to binary conversion of numbers that would otherwise overflow
 	 * java's primitive <code>int</code>.
-	 * @param float_value - the float value to convert to string (decimal)
-	 * @return the string representation of the float value, converted to binary.
+	 * @param long_value - the long value to convert to string (decimal)
+	 * @return the string representation of the long value, converted to binary.
 	 */
-	static String dtob_float (float float_value) {
-		int size = p2_float(float_value)+1; // the length of the string.
-		ArrayList<Float> bin = new ArrayList<Float>(50);
+	static String dtob_long (long long_value) {
+		int size = p2_long(long_value)+1; // the length of the string.
+		ArrayList<Long> bin = new ArrayList<Long>(50);
 		for ( int i = 0 ; i < size ; ++i )
-			bin.add(Float.valueOf(0)); // "Initialize" array
+			bin.add(Long.valueOf(0)); // "Initialize" array
 		
 		for ( int i = 0 ; i < size ; i ++ ) {
-			bin.set(i, Float.valueOf(0)); // set default to 0, put in 1's later
+			bin.set(i, Long.valueOf(0)); // set default to 0, put in 1's later
 		}
-		float R = (float) (float_value - Math.pow(2, p2_float(float_value)));
-		bin.set(p2_float(float_value), Float.valueOf(1));
+		long R = (long) (long_value - Math.pow(2, p2_long(long_value)));
+		bin.set(p2_long(long_value), Long.valueOf(1));
 		while ( R != 0 )
 		{
-			int nhp = p2_float(R);
-			bin.set(nhp, Float.valueOf(1));
-			R=(float) (R-Math.pow(2, p2_float(R)));
+			int nhp = p2_long(R);
+			bin.set(nhp, Long.valueOf(1));
+			R=(long) (R-Math.pow(2, p2_long(R)));
 		}
 		String str = new String();
 		
 		// print out the array backwards
 		for ( int i = (size-1) ; i >= 0 ; i-- ) {
-			str += bin.get(i).toString().replaceAll("\\.?0*$", "");
+			str += bin.get(i);
 		}
 		return str;
 	}

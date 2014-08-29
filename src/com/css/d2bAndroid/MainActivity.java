@@ -252,10 +252,10 @@ public class MainActivity extends Activity {
 								}
 								if ( message1.length() > 9 ) 
 								{
-									// need float
+									// need long, primitive int overflows here
 									conversion_results.setTextSize(14);
-									Float num = Float.parseFloat(message1);
-									String result = D2BConversionLogic.dtob_float(num);
+									Long num = Long.parseLong(message1);
+									String result = D2BConversionLogic.dtob_long(num);
 									conversion_results.setText(result);
 									return;
 								} else {
