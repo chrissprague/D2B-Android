@@ -21,9 +21,14 @@
     <string name="about_button_string">View Project on GitHub</string>
     <string name="d2b_version_number">D2B-Android Version 1.2.0</string> <!-- this is arbitrary at the moment -->
 	<string name="color_scheme">Color Scheme</string>
-    <string name="title_activity_settings">SettingsActivity</string>
-    <string name="hello_world">Hello world!</string>
+    <string name="title_activity_settings">Settings</string>
     <string name="checkedtextview">CheckedTextView</string>
-    <string name="button">Button</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
+    <string name="defaults">Defaults</string>
+    <string name="dark">Dark</string>
+    <string name="light">Light</string>
+    <string name="preference_file">com.css.d2bAndroid.conf</string>
+    <string name="SETTINGS_theme_reference">D2B_THEME_LIGHT</string>
 
 </resources>

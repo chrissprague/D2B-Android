@@ -3,7 +3,13 @@ package com.css.d2bAndroid;
 import java.util.ArrayList;
 
 import android.app.Activity;
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
+import android.content.pm.PackageInfo;
+import android.content.pm.PackageManager;
+import android.content.pm.PackageManager.NameNotFoundException;
+import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.os.Bundle;
 import android.text.Editable;
@@ -27,7 +33,11 @@ import android.widget.TextView;
  * @author Christopher Sprague
  */
 public class MainActivity extends Activity {
-
+	
+	private SharedPreferences sp;
+	
+	private int CURRENT_THEME;
+	
 	private static final ArrayList<String> input_array = new ArrayList<String>();
 	private static final ArrayList<String> output_array = new ArrayList<String>();
 	private final OnItemSelectedListener conversion_listener = getSpinnerOnItemSelectedListener();
@@ -71,6 +81,38 @@ public class MainActivity extends Activity {
 	protected void onCreate(Bundle savedInstanceState) {		
 		super.onCreate(savedInstanceState);
 		populateArrays();
+		
+		sp  = this.getSharedPreferences(
+				getString(R.string.preference_file), Context.MODE_PRIVATE);
+	 
+		PackageInfo pkgInfo;
+		int the_theme = 0;
+		try {
+			pkgInfo = getPackageManager().getPackageInfo(getPackageName(), PackageManager.GET_META_DATA);
+			the_theme = pkgInfo.applicationInfo.theme;
+		} catch (NameNotFoundException e1) {
+			e1.printStackTrace();
+			System.exit(4);
+		}
+		CURRENT_THEME=the_theme;
+		
+		// check sp here for theme
+		if ( sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true) )
+		{
+			if ( ! ( android.R.style.Theme_Holo_Light == the_theme ) )
+			{
+				this.setTheme(android.R.style.Theme_Holo_Light);
+				// light
+			}
+		}
+		else
+		{
+			if ( ! ( android.R.style.Theme_Holo == the_theme ) )
+			{
+				this.setTheme(android.R.style.Theme_Holo);
+				// dark
+			}
+		}
 		setContentView(R.layout.activity_main);
 		input_message = (EditText)findViewById(R.id.input_message);
 		input_message.addTextChangedListener(text_watcher);
@@ -134,10 +176,19 @@ public class MainActivity extends Activity {
 	 */
 	private void doConversion ( ) 
 	{
+		int the_color;
+		if ( sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true) )
+		{
+			the_color = Color.BLACK;
+		}
+		else
+		{
+			the_color = Color.WHITE;
+		}
 		// will be converted to red if an error comes up.
 		// this addresses the issue in which you go erroneous input in D->B and then
 		// switch the input type to binary (and possibly other combinations.)
-		conversion_results.setTextColor(Color.BLACK);
+		conversion_results.setTextColor(the_color);
 		conversion_results.setTextSize(20);
 		// TODO allow for strings in !English languages
 		switch ( input_spinner.getSelectedItem().toString() )
@@ -157,7 +208,7 @@ public class MainActivity extends Activity {
 								return;
 							}
 							try {
-								conversion_results.setTextColor(Color.BLACK);
+								conversion_results.setTextColor(the_color);
 								conversion_results.setTextSize(20);
 								// first, validate that it's only 1's and 0's
 								for ( int i = 0 ; i < message2.length() ; i++ )
@@ -194,7 +245,7 @@ public class MainActivity extends Activity {
 								return;
 							}
 							try {
-								conversion_results.setTextColor(Color.BLACK);
+								conversion_results.setTextColor(the_color);
 								conversion_results.setTextSize(20);
 								// first, validate that it's only 1's and 0's
 								for ( int i = 0 ; i < the_message.length() ; i++ )
@@ -216,7 +267,7 @@ public class MainActivity extends Activity {
 						break;
 						
 					default:
-						System.err.println("Unrecognized conversion type 298" + output_spinner.getSelectedItem().toString());
+						System.err.println("Unrecognized conversion type: " + output_spinner.getSelectedItem().toString());
 						System.exit(1);
 						break;
 				}
@@ -238,7 +289,7 @@ public class MainActivity extends Activity {
 								return;
 							}
 							try {
-								conversion_results.setTextColor(Color.BLACK);
+								conversion_results.setTextColor(the_color);
 								conversion_results.setTextSize(20);
 								// first, validate that it's valid decimal 0-9, and integer
 								for ( int i = 0 ; i < message1.length() ; i++ )

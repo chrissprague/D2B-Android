@@ -1,7 +1,61 @@
-<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/container"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context="com.css.d2bAndroid.SettingsActivity"
-    tools:ignore="MergeRootFrame" />
+    android:orientation="vertical"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    tools:context="com.css.d2bAndroid.SettingsActivity$PlaceholderFragment" >
+
+    <Switch
+        android:id="@+id/switch1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/color_scheme"
+        android:textOn="@string/light"
+        android:textOff="@string/dark"
+        android:onClick="onSwitchClick" />
+    
+
+    <LinearLayout
+        style="?android:attr/buttonBarStyle"
+        android:id="@+id/InnerLinearLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:weightSum="3"
+        android:gravity="bottom|center" >
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_gravity="left"
+            android:layout_weight="1"
+            android:text="@string/save"
+            android:onClick="onSaveClick" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button2"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            android:layout_height="wrap_content"
+            android:text="@string/cancel"
+            android:onClick="onCancelClick" />
+
+        <Button
+            style="?android:attr/buttonBarButtonStyle"
+            android:id="@+id/button3"
+            android:layout_weight="1"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:text="@string/defaults"
+            android:onClick="onDefaultsClick" />
+
+    </LinearLayout>
+    
+</RelativeLayout>
