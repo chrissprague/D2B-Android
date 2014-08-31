@@ -14,6 +14,15 @@ import android.view.View;
 import android.view.inputmethod.InputMethodManager;
 import android.widget.Switch;
 
+/**
+ * The Settings Activity, which can be reached through the options
+ * menu in the Main Activity. In the Settings Activity, the user may
+ * define and set various settings for the app. These settings are
+ * preserved across each run of the app, using Android's
+ * {@link android.content.SharedPreferences SharedPreferences}.
+ * @author Christopher Sprague
+ *
+ */
 public class SettingsActivity extends Activity {
 	
 	SimpleCursorAdapter mAdapter;
@@ -27,7 +36,14 @@ public class SettingsActivity extends Activity {
 	private static Notification theNotification;
 	private NotificationManager mNotifyManager;
 	private InputMethodManager imm;
-
+	
+	/**
+	 * Called upon creation of the Settings Activity.
+	 * Checks against the shared preferences for the app
+	 * and opens the editor for the shared preferences.
+	 * If already set, load the proper theme that was saved
+	 * in the app's preferences already.
+	 */
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		
@@ -51,17 +67,32 @@ public class SettingsActivity extends Activity {
 		
 		setContentView(R.layout.activity_settings);
 		
+		// instantiate the notification manager, used in creating/sending notifications
 		mNotifyManager = (NotificationManager) getSystemService(NOTIFICATION_SERVICE);
+		
+		// save the switch component into a variable after finding it by its ID.
 		theSwitch = (Switch)findViewById(R.id.switch1);
+		
+		// set the switch on/off based on the shared preferences. default is "ON" = the light color scheme.
 		theSwitch.setChecked(sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true));
 
 	}
-
+	
+	/**
+	 * Creates the options menu for the Settings Activity.
+	 * The Settings Activity currently doesn't feature a menu
+	 * of its own, so this is unused.
+	 */
 	@Override
 	public boolean onCreateOptionsMenu(Menu menu) {
 		return true;
 	}
-
+	
+	/**
+	 * Called with the designated menu item from this activity's
+	 * The Settings Activity doesn't use a menu, so this method
+	 * is unused.
+	 */
 	@Override
 	public boolean onOptionsItemSelected(MenuItem item) {
 		return super.onOptionsItemSelected(item);
@@ -77,12 +108,29 @@ public class SettingsActivity extends Activity {
 		// TODO revert all settings to defaults in here.
 	}
 	
+	/**
+	 * Called when the user presses the Save button in
+	 * the Settings Activity. Saves any changes made in
+	 * this activity into <code>sp</code>, the app's
+	 * Shared Preferences. Commits the changes, and recreates
+	 * the activity if theme changes are to occur.
+	 * TODO This button will Save your changes (if there
+	 * are any) and then closes the Settings Activity.
+	 * @param view - the current view.
+	 */
 	public void onSaveClick(View view)
 	{
 		spe.commit();
 		this.recreate();
 	}
 	
+	/**
+	 * Called when the user presses the cancel button.
+	 * TODO This button will cancel/discard changes (if
+	 * there are any) made and then close the Settings
+	 * Activity.
+	 * @param view
+	 */
 	public void onCancelClick(View view)
 	{
 		// TODO discard changes?
@@ -90,6 +138,8 @@ public class SettingsActivity extends Activity {
 	
 	/**
 	 * What happens when the user hits the switch ("Color Scheme") switcher
+	 * Effects do not take effect until changes to settings are committed
+	 * by pressing the Save button.
 	 * @param view - the current view
 	 */
 	public void onSwitchClick(View view)
