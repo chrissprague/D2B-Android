@@ -20,6 +20,7 @@ import android.widget.Switch;
  * define and set various settings for the app. These settings are
  * preserved across each run of the app, using Android's
  * {@link android.content.SharedPreferences SharedPreferences}.
+ * @see android.app.Activity
  * @author Christopher Sprague
  *
  */

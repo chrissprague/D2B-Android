@@ -38,7 +38,6 @@ public class AboutActivity extends Activity {
 		
 		super.onCreate(savedInstanceState);
 		setContentView(R.layout.activity_about);
-		setTitle("About D2B-Android"); // TODO not like this, use @ string and don't set the title like this
 	}
 	
 	/**
