@@ -1,19 +1,47 @@
+#built application files
+*.apk
+*.ap_
+
+# files for the dex VM
+*.dex
+
+# Java class files
 *.class
-gen
-bin
-proguard-project.txt
-project.properties
+
+# generated files
+bin/
+gen/
+
+# Local configuration file (sdk path, etc)
+local.properties
+
+# Windows thumbnail db
+Thumbs.db
+
+# OSX files
+.DS_Store
+
+# Eclipse project files
 .classpath
-*.aux
-*.log
-*.pdf
-*.png
 .project
-.settings/*
 
-/libs
+# Android Studio
+.idea
+.gradle
+build/
+app/build
+app/*/
 
-# Package Files #
-*.jar
-*.war
-*.ear
+/*/out
+/*/*/build
+/*/*/production
+*.iws
+*.ipr
+*~
+*.swp
+*.iml
+
+gradle/
+gradlew
+gradlew.bat
+
