@@ -11,42 +11,38 @@ import android.view.View;
 /**
  * the about activity, with about information and
  * button linking to project view
- * 
+ *
  * @author Christopher Sprague
  */
 public class AboutActivity extends Activity {
-	
-	private SharedPreferences sp;
-	
-	@Override
-	protected void onCreate(Bundle savedInstanceState) {
-		
-		sp  = this.getSharedPreferences(
-				getString(R.string.preference_file), Context.MODE_PRIVATE);
-		
-		// check sp here for theme
-		if ( sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true) )
-		{
-			// light
-			this.setTheme(android.R.style.Theme_Holo_Light);
-		}
-		else
-		{
-			// dark
-			this.setTheme(android.R.style.Theme_Holo);
-		}
-		
-		super.onCreate(savedInstanceState);
-		setContentView(R.layout.activity_about);
-	}
-	
-	/**
-	 * view project on the interwebs
-	 * @param view the calling view.
-	 */
-	public void doViewProject(View view)
-	{
-		Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/chrissprague/D2B-Android"));
-		startActivity(browserIntent);
-	}
+
+    private SharedPreferences sp;
+
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+
+        sp = this.getSharedPreferences(
+                getString(R.string.preference_file), Context.MODE_PRIVATE);
+
+        // check sp here for theme
+        if (sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true)) {
+            // light
+            this.setTheme(android.R.style.Theme_Holo_Light);
+        } else {
+            // dark
+            this.setTheme(android.R.style.Theme_Holo);
+        }
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_about);
+    }
+
+    /**
+     * view project on the interwebs
+     *
+     * @param view the calling view.
+     */
+    public void doViewProject(View view) {
+        Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/chrissprague/D2B-Android"));
+        startActivity(browserIntent);
+    }
 }
