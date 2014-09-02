@@ -7,8 +7,6 @@ Handles Decimal (Natural Numbers) to Binary conversion, as well as Binary to Dec
 
 To operate, simply choose the data types (specifying both input and output -- default is Decimal to Binary, respectively) and enter your number into the text field available at the top of the app. Conversions happen dynamically and update immediately upon input changes, including changes to the specified input and/or output types.
 
-App is currently designed to run on - and solely supported on - 4.4 (KitKat).
-
 Setup
 ----------
 This app is not currently available through any app store, so to run it, you'll have to get the .apk and install the app manually.
