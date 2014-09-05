@@ -30,5 +30,7 @@
     <string name="preference_file">com.css.d2bAndroid.conf</string>
     <string name="SETTINGS_theme_reference">D2B_THEME_LIGHT</string>
     <string name="AboutActivityTitle">About D2B-Android</string>
+    <string name="savedChangesToast">Saved Changes.</string>
+    <string name="cancelledChangesToast">Discarded Changes.</string>
 
 </resources>

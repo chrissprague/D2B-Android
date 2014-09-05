@@ -4,10 +4,13 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.SharedPreferences;
 import android.os.Bundle;
+import android.support.v4.app.NavUtils;
+import android.view.Gravity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
+import android.widget.Toast;
 
 /**
  * The Settings Activity, which can be reached through the options
@@ -25,6 +28,8 @@ public class SettingsActivity extends Activity {
     private SharedPreferences.Editor spe;
 
     private Switch theSwitch;
+
+    private Toast butter; // haha get it???
 
     /*
     SimpleCursorAdapter mAdapter;
@@ -97,10 +102,11 @@ public class SettingsActivity extends Activity {
      * What happens when the user hits the "Defaults" button.
      * Changes won't be committed until the "Save" button is hit though.
      *
-     * @param view - the current view
+     * @param view the current view
      */
     public void onDefaultsClick(View view) {
         // TODO revert all settings to defaults in here.
+        // TODO ask before switching to all defaults.
     }
 
     /**
@@ -109,26 +115,37 @@ public class SettingsActivity extends Activity {
      * this activity into <code>sp</code>, the app's
      * Shared Preferences. Commits the changes, and recreates
      * the activity if theme changes are to occur.
-     * TODO This button will Save your changes (if there
+     *
+     * This button will Save your changes (if there
      * are any) and then closes the Settings Activity.
      *
-     * @param view - the current view.
+     * @param view the current view.
      */
     public void onSaveClick(View view) {
         spe.commit();
         this.recreate();
+        NavUtils.navigateUpFromSameTask(this);
+        butter = Toast.makeText(this, R.string.savedChangesToast, Toast.LENGTH_SHORT);
+        butter.setGravity(Gravity.CENTER, 0 , 0);
+        butter.show();
     }
 
     /**
      * Called when the user presses the cancel button.
-     * TODO This button will cancel/discard changes (if
+     * This button will cancel/discard changes (if
      * there are any) made and then close the Settings
      * Activity.
      *
      * @param view - the current view.
      */
     public void onCancelClick(View view) {
-        // TODO discard changes?
+        // TODO ask-before discarding changes?
+        NavUtils.navigateUpFromSameTask(this);
+        /* IMHO, a toast for changes being *discarded* is (arguably) bad design
+        butter = Toast.makeText(this, R.string.cancelledChangesToast, Toast.LENGTH_SHORT);
+        butter.setGravity(Gravity.CENTER, 0 , 0);
+        butter.show();
+        */
     }
 
     /**
@@ -136,7 +153,7 @@ public class SettingsActivity extends Activity {
      * Effects do not take effect until changes to settings are committed
      * by pressing the Save button.
      *
-     * @param view - the current view
+     * @param view the current view
      */
     public void onSwitchClick(View view) {
         spe.putBoolean(getString(R.string.SETTINGS_theme_reference), theSwitch.isChecked());
