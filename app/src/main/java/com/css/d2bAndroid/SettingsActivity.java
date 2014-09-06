@@ -111,7 +111,6 @@ public class SettingsActivity extends Activity {
      */
     public void onSaveClick(@SuppressWarnings("UnusedParameters") View view) {
         spe.commit();
-        this.recreate();
         NavUtils.navigateUpFromSameTask(this);
         Toast butter = Toast.makeText(this, R.string.savedChangesToast, Toast.LENGTH_SHORT);
         butter.setGravity(Gravity.CENTER, 0, 0);
