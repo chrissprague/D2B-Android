@@ -9,6 +9,7 @@ package com.css.d2bAndroid;
  *
  * @author Christopher Sprague
  */
+@SuppressWarnings("WeakerAccess")
 public class B2DConversionLogic {
 
     /**

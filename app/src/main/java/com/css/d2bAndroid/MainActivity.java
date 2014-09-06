@@ -31,6 +31,7 @@ import java.util.ArrayList;
  *
  * @author Christopher Sprague
  */
+@SuppressWarnings("WeakerAccess")
 public class MainActivity extends Activity {
 
     private SharedPreferences sp;
@@ -136,7 +137,7 @@ public class MainActivity extends Activity {
      *
      * @param m - the menu item, "About".
      */
-    public void doAbout(MenuItem m) {
+    public void doAbout(@SuppressWarnings("UnusedParameters") MenuItem m) {
         Intent intent = new Intent(this, AboutActivity.class);
         startActivity(intent);
     }
@@ -147,7 +148,7 @@ public class MainActivity extends Activity {
      *
      * @param m - the menu item, "Settings".
      */
-    public void doSettings(MenuItem m) {
+    public void doSettings(@SuppressWarnings("UnusedParameters") MenuItem m) {
         Intent intent = new Intent(this, SettingsActivity.class);
         startActivity(intent);
     }

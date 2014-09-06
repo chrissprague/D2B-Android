@@ -21,7 +21,7 @@ import java.util.ArrayList;
  *
  * @author Christopher Sprague
  */
-public class D2BConversionLogic {
+class D2BConversionLogic {
 
     /**
      * given an integer value_remaining (think remainder)
@@ -34,7 +34,7 @@ public class D2BConversionLogic {
      * if the 2^power = value_remaining, then this is the
      * last '1' we need in the binary representation.
      */
-    static int p2(int value_remaining) {
+    private static int p2(int value_remaining) {
         if (value_remaining == 0) {
             return 0; // base case
         }
@@ -54,7 +54,7 @@ public class D2BConversionLogic {
      * @param value_remaining - the remaining unaccounted-for value of the input number.
      * @return something
      */
-    static int p2_long(long value_remaining) {
+    private static int p2_long(long value_remaining) {
         if (value_remaining == 0) {
             return 0; // base case
         }

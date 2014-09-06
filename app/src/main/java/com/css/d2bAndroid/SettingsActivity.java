@@ -7,7 +7,6 @@ import android.os.Bundle;
 import android.support.v4.app.NavUtils;
 import android.view.Gravity;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
@@ -22,14 +21,13 @@ import android.widget.Toast;
  * @author Christopher Sprague
  * @see android.app.Activity
  */
+@SuppressWarnings("WeakerAccess")
 public class SettingsActivity extends Activity {
 
     private SharedPreferences sp;
     private SharedPreferences.Editor spe;
 
     private Switch theSwitch;
-
-    private Toast butter; // haha get it???
 
     /*
     SimpleCursorAdapter mAdapter;
@@ -89,22 +87,12 @@ public class SettingsActivity extends Activity {
     }
 
     /**
-     * Called with the designated menu item from this activity's
-     * The Settings Activity doesn't use a menu, so this method
-     * is unused.
-     */
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
-
-    /**
      * What happens when the user hits the "Defaults" button.
      * Changes won't be committed until the "Save" button is hit though.
      *
      * @param view the current view
      */
-    public void onDefaultsClick(View view) {
+    public void onDefaultsClick(@SuppressWarnings("UnusedParameters") View view) {
         // TODO revert all settings to defaults in here.
         // TODO ask before switching to all defaults.
     }
@@ -121,12 +109,12 @@ public class SettingsActivity extends Activity {
      *
      * @param view the current view.
      */
-    public void onSaveClick(View view) {
+    public void onSaveClick(@SuppressWarnings("UnusedParameters") View view) {
         spe.commit();
         this.recreate();
         NavUtils.navigateUpFromSameTask(this);
-        butter = Toast.makeText(this, R.string.savedChangesToast, Toast.LENGTH_SHORT);
-        butter.setGravity(Gravity.CENTER, 0 , 0);
+        Toast butter = Toast.makeText(this, R.string.savedChangesToast, Toast.LENGTH_SHORT);
+        butter.setGravity(Gravity.CENTER, 0, 0);
         butter.show();
     }
 
@@ -138,14 +126,9 @@ public class SettingsActivity extends Activity {
      *
      * @param view - the current view.
      */
-    public void onCancelClick(View view) {
+    public void onCancelClick(@SuppressWarnings("UnusedParameters") View view) {
         // TODO ask-before discarding changes?
         NavUtils.navigateUpFromSameTask(this);
-        /* IMHO, a toast for changes being *discarded* is (arguably) bad design
-        butter = Toast.makeText(this, R.string.cancelledChangesToast, Toast.LENGTH_SHORT);
-        butter.setGravity(Gravity.CENTER, 0 , 0);
-        butter.show();
-        */
     }
 
     /**
@@ -155,7 +138,7 @@ public class SettingsActivity extends Activity {
      *
      * @param view the current view
      */
-    public void onSwitchClick(View view) {
+    public void onSwitchClick(@SuppressWarnings("UnusedParameters") View view) {
         spe.putBoolean(getString(R.string.SETTINGS_theme_reference), theSwitch.isChecked());
         if (theSwitch.isChecked()) {
             this.setTheme(android.R.style.Theme_Holo_Light);

@@ -14,14 +14,13 @@ import android.view.View;
  *
  * @author Christopher Sprague
  */
+@SuppressWarnings("WeakerAccess")
 public class AboutActivity extends Activity {
-
-    private SharedPreferences sp;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        sp = this.getSharedPreferences(
+        SharedPreferences sp = this.getSharedPreferences(
                 getString(R.string.preference_file), Context.MODE_PRIVATE);
 
         // check sp here for theme
@@ -41,7 +40,7 @@ public class AboutActivity extends Activity {
      *
      * @param view the calling view.
      */
-    public void doViewProject(View view) {
+    public void doViewProject(@SuppressWarnings("UnusedParameters") View view) {
         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse("https://github.com/chrissprague/D2B-Android"));
         startActivity(browserIntent);
     }
