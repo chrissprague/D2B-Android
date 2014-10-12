@@ -20,11 +20,11 @@ public class AboutActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        SharedPreferences sp = this.getSharedPreferences(
+        SharedPreferences sharedPreferences = this.getSharedPreferences(
                 getString(R.string.preference_file), Context.MODE_PRIVATE);
 
-        // check sp here for theme
-        if (sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true)) {
+        // check sharedPreferences here for theme
+        if (sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), true)) {
             // light
             this.setTheme(android.R.style.Theme_Holo_Light);
         } else {

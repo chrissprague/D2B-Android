@@ -23,7 +23,8 @@
     <string name="dark">Dark</string>
     <string name="light">Light</string>
     <string name="preference_file">com.css.d2bAndroid.conf</string>
-    <string name="SETTINGS_theme_reference">D2B_THEME_LIGHT</string>
+    <string name="SETTINGS_theme_reference">D2B_THEME</string>
+    <string name="SETTINGS_intermediate_theme_reference">D2B_THEME_INTERMEDIATE</string>
     <string name="AboutActivityTitle">About D2B-Android</string>
     <string name="savedChangesToast">Saved Changes.</string>
     <string name="cancelledChangesToast">Discarded Changes.</string>

@@ -10,6 +10,8 @@ import android.view.Menu;
 import android.view.View;
 import android.widget.Switch;
 import android.widget.Toast;
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 
 /**
  * The Settings Activity, which can be reached through the options
@@ -24,8 +26,8 @@ import android.widget.Toast;
 @SuppressWarnings("WeakerAccess")
 public class SettingsActivity extends Activity {
 
-    private SharedPreferences sp;
-    private SharedPreferences.Editor spe;
+    private SharedPreferences sharedPreferences;
+    private SharedPreferences.Editor sharedPreferencesEditor;
 
     private Switch theSwitch;
 
@@ -48,12 +50,12 @@ public class SettingsActivity extends Activity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
-        sp = this.getSharedPreferences(
+        sharedPreferences = this.getSharedPreferences(
                 getString(R.string.preference_file), Context.MODE_PRIVATE);
-        spe = sp.edit();
+        sharedPreferencesEditor = sharedPreferences.edit();
 
-        // check sp here for theme
-        if (sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true)) {
+        // check sharedPreferences here for theme
+        if (sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), true)) {
             // light
             this.setTheme(android.R.style.Theme_Holo_Light);
         } else {
@@ -72,7 +74,7 @@ public class SettingsActivity extends Activity {
         theSwitch = (Switch) findViewById(R.id.switch1);
 
         // set the switch on/off based on the shared preferences. default is "ON" = the light color scheme.
-        theSwitch.setChecked(sp.getBoolean(getString(R.string.SETTINGS_theme_reference), true));
+        theSwitch.setChecked(sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), true));
 
     }
 
@@ -93,14 +95,40 @@ public class SettingsActivity extends Activity {
      * @param view the current view
      */
     public void onDefaultsClick(@SuppressWarnings("UnusedParameters") View view) {
-        // TODO revert all settings to defaults in here.
-        // TODO ask before switching to all defaults.
+        new AlertDialog.Builder(this)
+                .setTitle("Restore Defaults")
+                .setMessage("Are you sure you want restore the default settings?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener()
+                {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        // do defaults here!
+                        restoreDefaults();
+                    }
+
+                })
+                .setNegativeButton("No", null)
+                .show();
+    }
+
+    /**
+     * Define your defaults here.
+     *
+     * No args, no return.
+     */
+    private void restoreDefaults()
+    {
+        theSwitch.setChecked(true);
+        sharedPreferencesEditor.putBoolean(getString(R.string.SETTINGS_theme_reference), true);
+        this.setTheme(android.R.style.Theme_Holo_Light);
+        sharedPreferencesEditor.commit();
+        this.recreate();
     }
 
     /**
      * Called when the user presses the Save button in
      * the Settings Activity. Saves any changes made in
-     * this activity into <code>sp</code>, the app's
+     * this activity into <code>sharedPreferences</code>, the app's
      * Shared Preferences. Commits the changes, and recreates
      * the activity if theme changes are to occur.
      *
@@ -110,11 +138,12 @@ public class SettingsActivity extends Activity {
      * @param view the current view.
      */
     public void onSaveClick(@SuppressWarnings("UnusedParameters") View view) {
-        spe.commit();
-        NavUtils.navigateUpFromSameTask(this);
+        sharedPreferencesEditor.putBoolean(getString(R.string.SETTINGS_intermediate_theme_reference), theSwitch.isChecked());
+        sharedPreferencesEditor.commit();
         Toast butter = Toast.makeText(this, R.string.savedChangesToast, Toast.LENGTH_SHORT);
         butter.setGravity(Gravity.CENTER, 0, 0);
         butter.show();
+        NavUtils.navigateUpFromSameTask(this);
     }
 
     /**
@@ -126,23 +155,30 @@ public class SettingsActivity extends Activity {
      * @param view - the current view.
      */
     public void onCancelClick(@SuppressWarnings("UnusedParameters") View view) {
+        // revert the theme setting to the intermediate value (determined when
+        // the settings activity is first launched from the main activity
+        sharedPreferencesEditor.putBoolean(getString(R.string.SETTINGS_theme_reference),
+                sharedPreferences.getBoolean(getString(R.string.SETTINGS_intermediate_theme_reference), true));
+        sharedPreferencesEditor.commit();
+
         // TODO ask-before discarding changes?
         NavUtils.navigateUpFromSameTask(this);
     }
 
     /**
      * What happens when the user hits the switch ("Color Scheme") switcher
-     * Effects do not take effect until changes to settings are committed
-     * by pressing the Save button.
      *
      * @param view the current view
      */
     public void onSwitchClick(@SuppressWarnings("UnusedParameters") View view) {
-        spe.putBoolean(getString(R.string.SETTINGS_theme_reference), theSwitch.isChecked());
+        sharedPreferencesEditor.putBoolean(getString(R.string.SETTINGS_theme_reference),
+                theSwitch.isChecked());
         if (theSwitch.isChecked()) {
             this.setTheme(android.R.style.Theme_Holo_Light);
         } else {
             this.setTheme(android.R.style.Theme_Holo);
         }
+        sharedPreferencesEditor.commit();
+        this.recreate();
     }
 }
