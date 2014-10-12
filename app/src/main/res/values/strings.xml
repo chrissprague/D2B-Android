@@ -14,7 +14,7 @@
     <string name="about_string3">Special Thanks to</string>
     <string name="about_string4">Joseph Kozak, for the app\'s artwork</string>
     <string name="about_button_string">View Project on GitHub</string>
-    <string name="d2b_version_number">D2B-Android Version 1.2.1</string> <!-- this is arbitrary at the moment -->
+    <string name="d2b_version_number">D2B-Android Version 1.2.2</string> <!-- Arbitrary -->
 	<string name="color_scheme">Color Scheme</string>
     <string name="title_activity_settings">Settings</string>
     <string name="save">Save</string>
