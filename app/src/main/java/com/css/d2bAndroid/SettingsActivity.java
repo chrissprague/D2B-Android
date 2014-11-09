@@ -55,11 +55,9 @@ public class SettingsActivity extends Activity {
         sharedPreferencesEditor = sharedPreferences.edit();
 
         // check sharedPreferences here for theme
-        if (sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), true)) {
-            // light
+        if (sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), false)) {
             this.setTheme(android.R.style.Theme_Holo_Light);
         } else {
-            // dark
             this.setTheme(android.R.style.Theme_Holo);
         }
 
@@ -73,8 +71,8 @@ public class SettingsActivity extends Activity {
         // save the switch component into a variable after finding it by its ID.
         theSwitch = (Switch) findViewById(R.id.switch1);
 
-        // set the switch on/off based on the shared preferences. default is "ON" = the light color scheme.
-        theSwitch.setChecked(sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), true));
+        // set the switch on/off based on the shared preferences. default is "OFF" = the dark color scheme.
+        theSwitch.setChecked(sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), false));
 
     }
 
@@ -118,9 +116,9 @@ public class SettingsActivity extends Activity {
      */
     private void restoreDefaults()
     {
-        theSwitch.setChecked(true);
-        sharedPreferencesEditor.putBoolean(getString(R.string.SETTINGS_theme_reference), true);
-        this.setTheme(android.R.style.Theme_Holo_Light);
+        theSwitch.setChecked(false);
+        sharedPreferencesEditor.putBoolean(getString(R.string.SETTINGS_theme_reference), false);
+        this.setTheme(android.R.style.Theme_Holo);
         sharedPreferencesEditor.commit();
         this.recreate();
     }

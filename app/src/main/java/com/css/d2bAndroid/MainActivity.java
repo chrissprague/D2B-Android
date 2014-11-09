@@ -88,16 +88,15 @@ public class MainActivity extends Activity {
             e1.printStackTrace();
             System.exit(4);
         }
+
         // check sharedPreferences here for theme
-        if (sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), true)) {
+        if (sharedPreferences.getBoolean(getString(R.string.SETTINGS_theme_reference), false)) {
             if (!(android.R.style.Theme_Holo_Light == the_theme)) {
                 this.setTheme(android.R.style.Theme_Holo_Light);
-                // light
             }
         } else {
             if (!(android.R.style.Theme_Holo == the_theme)) {
-                this.setTheme(android.R.style.Theme_Holo);
-                // dark
+                this.setTheme( android.R.style.Theme_Holo );
             }
         }
         setContentView(R.layout.activity_main);
