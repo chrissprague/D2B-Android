@@ -7,9 +7,13 @@ Handles Decimal (Natural Numbers) to Binary conversion, as well as Binary to Dec
 
 To operate, simply choose the data types (specifying both input and output -- default is Decimal to Binary, respectively) and enter your number into the text field available at the top of the app. Conversions happen dynamically and update immediately upon input changes, including changes to the specified input and/or output types.
 
-Setup
+Get it on the [Play Store](https://play.google.com/store/apps?hl=en)
 ----------
-This app is not currently available through any app store, so to run it, you'll have to get the .apk and install the app manually.
+Production-ready versions will be published directly to the Play Store [right here](https://play.google.com/store/apps/details?id=com.css.d2bAndroid). It's free!
+
+Setup (Debugging - The Old Way to Install)
+----------
+Below describes the old way to access the app using the <code>.apk</code> files and by version. While I strongly encourage you to use the above method (simply grabbing it through the Play Store, where it is now published,) I will keep this section in for archival purposes.
 
  1. Allow installation of apps from unknown sources.<br>
   a) Navigate to your phone's Settings.<br>
@@ -21,3 +25,10 @@ This app is not currently available through any app store, so to run it, you'll 
  4. Once the .apk has been successfully downloaded onto your phone, simply open (touch/click on) the .apk to start the installation process!
  
 For bug reports, comments, questions, and concerns, please leave a comment or contact me here on github.
+
+Setup (Development)
+----------
+This section will detail how to set up your machine to develop and contribute to D2B. It's a relatively small project, so you - yes, <i>you</i> - could make a <b>big</b> impact! (Just submit a pull request!)
+
+<b>!!!!! TODO !!!!!</b>
+
