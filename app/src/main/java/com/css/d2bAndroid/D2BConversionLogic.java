@@ -78,12 +78,13 @@ class D2BConversionLogic {
      * and integer representing the binary form of
      * the number you gave.
      * <p/>
-     * TODO Make static
      *
      * @param number - number to turn into binary
      * @return binary representation of that number
      */
     static String dtob(int number) {
+        if ( number == 0 )
+            return "0";
         int size = p2(number) + 1;
         int[] bin = new int[size];
         for (int i = 0; i < size; i++) {
@@ -115,6 +116,10 @@ class D2BConversionLogic {
      * @return the string representation of the long value, converted to binary.
      */
     static String dtob_long(long long_value) {
+        if ( long_value == 0 )
+        {
+            return "0";
+        }
         int size = p2_long(long_value) + 1; // the length of the string.
         ArrayList<Long> bin = new ArrayList<>(50);
         for (int i = 0; i < size; ++i)

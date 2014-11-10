@@ -244,7 +244,8 @@ public class MainActivity extends Activity {
                                 return;
                             }
                         }
-                        conversionResults.setText(inputMessage.getText().toString());
+                        String echo = inputMessage.getText().toString().replaceFirst("^0+(?!$)", "");
+                        conversionResults.setText(echo);
                         break;
 
                     default:
@@ -310,7 +311,19 @@ public class MainActivity extends Activity {
 
                     case "Decimal":
                         // decimal -> decimal; just echo the input
-                        conversionResults.setText(inputMessage.getText().toString());
+                        String message2 = inputMessage.getText().toString();
+                        if ( message2.length() == 0 )
+                        {
+                            return;
+                        }
+                        if (message2.length() > 31) {
+                            conversionResults.setTextColor(Color.RED);
+                            conversionResults.setTextSize(14);
+                            conversionResults.setText("Maximum number of digits supported is 31.");
+                            return;
+                        }
+                        message2.replaceFirst("^0+(?!$)", "");
+                        conversionResults.setText(message2);
                         break;
 
                     default:
