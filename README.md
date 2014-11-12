@@ -9,7 +9,8 @@ To operate, simply choose the data types (specifying both input and output -- de
 
 Get it on the [Play Store](https://play.google.com/store/apps?hl=en)
 ----------
-Production-ready versions will be published directly to the Play Store [right here](https://play.google.com/store/apps/details?id=com.css.d2bAndroid). It's free!
+Production-ready versions will be published directly to the Play Store [right here](https://play.google.com/store/apps/details?id=com.css.d2bAndroid). It's free!<br>
+<a href="https://play.google.com/store/apps/details?id=com.css.d2bAndroid" target="_blank"><img alt="Get it on Google Play" src="https://developer.android.com/images/brand/en_generic_rgb_wo_60.png" /></a>
 
 Setup (Debugging - The Old Way to Install)
 ----------
