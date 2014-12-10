@@ -31,5 +31,4 @@ Setup (Development)
 ----------
 This section will detail how to set up your machine to develop and contribute to D2B. It's a relatively small project, so you - yes, <i>you</i> - could make a <b>big</b> impact! (Just submit a pull request!)
 
-<b>!!!!! TODO !!!!!</b>
-
+At this time, if you wish to work on the app, and are having trouble setting up your development environment, please contact me directly.
