@@ -1,1 +1,0 @@
-30 0 * * * cd ~/public_html/Resources/Android/symlinkScripts; ./.symlinkLatestVersion.sh
