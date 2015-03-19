@@ -12,7 +12,7 @@
         <activity
             android:name=".MainActivity"
             android:label="@string/app_name"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@android:style/Theme.Holo.Light"
             android:windowSoftInputMode="stateVisible|adjustResize" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
@@ -22,18 +22,18 @@
         <activity
             android:name=".AboutActivity"
             android:label="@string/AboutActivityTitle"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@android:style/Theme.Holo.Light"
             android:parentActivityName=".MainActivity" >
         </activity>
 
         <meta-data
             android:name="android.support.PARENT_ACTIVITY"
-            android:value="com.css.d2bandroid.MainActivity" />
+            android:value="com.css.d2bAndroid.MainActivity" />
 
         <activity
             android:name=".SettingsActivity"
             android:label="@string/title_activity_settings"
-            android:theme="@android:style/Theme.Holo"
+            android:theme="@android:style/Theme.Holo.Light"
             android:parentActivityName=".MainActivity" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"

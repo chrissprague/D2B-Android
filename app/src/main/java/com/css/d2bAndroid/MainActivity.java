@@ -148,7 +148,7 @@ public class MainActivity extends Activity {
      *
      * @param m - the menu item, "Settings".
      */
-    public void doSettings(@SuppressWarnings("UnusedParameters") MenuItem m) {
+    public void doSettings(MenuItem m) {
         // save the intermediate theme value before saving/cancelling in the settings activity.
         // this is done each time the settings activity is started via the MainActivity.
         SharedPreferences.Editor sharedPreferencesEditor = sharedPreferences.edit();
