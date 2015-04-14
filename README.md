@@ -32,3 +32,7 @@ Setup (Development)
 This section will detail how to set up your machine to develop and contribute to D2B. It's a relatively small project, so you - yes, <i>you</i> - could make a <b>big</b> impact! (Just submit a pull request!)
 
 At this time, if you wish to work on the app, and are having trouble setting up your development environment, please contact me directly.
+
+A Funny Story
+----------
+I lost the original `apk` that I signed the app with, so I am no longer able to publish updates to the copy of the app on the store. If you're interested in making use of an up-to-date and (relatively) bug-free version, please contact me directly. :cactus:
